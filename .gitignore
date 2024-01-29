@@ -1,3 +1,6 @@
+#Data
+data/processed/
+
 # Distribution / packaging
 .Python
 build/
