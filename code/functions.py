@@ -52,6 +52,18 @@ def getLoopMaxSlope(c):
     return ms
 
 
+def getLoopPOIDiversity(c):
+    pd = [0, 0, 0]  # facilities, services, attractions
+    cl = len(c)
+    for i in range(cl):
+        pd = [
+            pd[0] or Gnx[c[i % cl]][c[(i + 1) % cl]]["has_facility"],
+            pd[1] or Gnx[c[i % cl]][c[(i + 1) % cl]]["has_service"],
+            pd[2] or Gnx[c[i % cl]][c[(i + 1) % cl]]["has_attraction"],
+        ]
+    return sum(pd)
+
+
 def getLoopWaterProfile(c):
     wp = tuple()
     cl = len(c)
