@@ -30,6 +30,28 @@ mamba deactivate
 
 You can now run `jupyter lab` with kernel `bikenwloops` (Kernel > Change Kernel > bikenwloops).
 
+## Data setup
+
+Data of the knudepunkter network comes from [BikeNodePlanner: Data for Denmark](https://github.com/anastassiavybornova/bike-node-planner-data-denmark) and [BikeNodePlanner](https://github.com/anastassiavybornova/bike-node-planner).
+
+### Step 1: Extract data with BikeNodePlanner: Data for Denmark
+
+- Use [BikeNodePlanner: Data for Denmark](https://github.com/anastassiavybornova/bike-node-planner-data-denmark)
+- Uncomment the municipalities of your study area in `config-municipalities.yml`
+- Set all values in `config-layers-polygon.yml` to `ignore`
+- Run the `run.sh` script
+- Copy all subfolders of `/input-for-bike-node-planner/` into the `/data/input/` folder of bike-node-planner
+
+### Step 2: Generate network data with BikeNodePlanner
+
+- Use [BikeNodePlanner](https://github.com/anastassiavybornova/bike-node-planner)
+- Run scripts 01 to 04
+- TO DO: Network simplification?
+- Let's call `loopspath` the data/input path to your project, for example `bikenwloops/data/input/fyn/`
+- Copy the file `nodes.gpkg` from `bike-node-planner/data/output/network` into `loopspath/network`
+- Copy the file `edges_slope.gpkg` from `bike-node-planner/data/output/elevation` into `loopspath/network`
+- Copy the whole folder `/input-for-bike-node-planner/point/` into `loopspath`
+
 ## Repository structure
 
 ```

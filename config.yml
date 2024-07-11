@@ -1,6 +1,6 @@
 # Provide the name of the study area/project as a slug.
 # Use https://you.tools/slugify/ if unsure.
-study_area: faxebig # provide name of study area
+study_area: fyn # provide name of study area
 
 # SCENARIO RESTRICTIONS
 # For now explore two scenarios:
