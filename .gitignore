@@ -1,5 +1,8 @@
 #Data
 data/processed/
+*/raw/*
+data/
+
 
 # Distribution / packaging
 .Python

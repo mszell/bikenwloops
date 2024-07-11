@@ -1,0 +1,43 @@
+# Provide the name of the study area/project as a slug.
+# Use https://you.tools/slugify/ if unsure.
+study_area: faxebig # provide name of study area
+
+# SCENARIO RESTRICTIONS
+# For now explore two scenarios:
+# 1: Family with small children
+# 2: Teenage/adult leisure cyclist
+
+# Provide the maximum acceptable gradient, in %.
+maxslope_limit: 4 # 4 / 6
+# Provide the minimum and maximum loop length, in meters.
+looplength_min: 5000 # 5000 / 10000
+looplength_max: 20000 # 20000 / 40000
+
+# SPECIFICATION PARAMETERS
+# These parameters come from the DKNT specification.
+
+# Provide the maximum length acceptable without a water
+# source, in meters.
+waterlength_max: 10000
+
+# Provide the lower and upper limits of face loop lengths,
+# in meters. # 90% of face loop lengths should conform to
+# these length limits.
+faceloop_limit_lower: 8000
+faceloop_limit_upper: 20000
+
+# Provide the optimal lower and upper limits of link
+# lengths, and the maximal link length, in meters.
+link_limit_lower: 1000
+link_limit_upper: 5000
+link_limit_max: 10000
+
+# TECHNICAL PARAMETERS
+
+# Provide the snap threshold, for snapping POIs to network
+# links, in meters.
+snap_threshold: 250
+
+# Provide the maximum number of nodes in a loop.
+# Above 30 will slow down computations.
+loop_numnode_bound: 30
