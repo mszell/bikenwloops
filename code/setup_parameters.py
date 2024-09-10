@@ -1,5 +1,6 @@
 import os
 import yaml
+from tqdm.notebook import tqdm
 
 with open(r"../config.yml") as file:
     parsed_yaml_file = yaml.load(file, Loader=yaml.FullLoader)
