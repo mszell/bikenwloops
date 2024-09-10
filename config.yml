@@ -42,3 +42,8 @@ snap_threshold: 250
 # Provide the maximum number of nodes in a loop.
 # Above 30 will slow down computations.
 loop_numnode_bound: 30
+
+# mperunit: Meters per length unit
+# If lengths are given in m, use 1.
+# If lengths are given in km, use 1000.
+mperunit: 1000
