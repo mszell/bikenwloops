@@ -6,7 +6,10 @@ def getLayout(G, nodes_id, nodes_coords):
     named_vertex_list = G.vs()["name"]
     layout = []
     for n in named_vertex_list:
-        pos = nodes_id.index(n)
+        try:
+            pos = nodes_id.index(n)
+        except:
+            print("There was an invalid node with name: " + str(n))
         layout.append(nodes_coords[pos])
     return layout
 
