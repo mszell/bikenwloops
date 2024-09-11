@@ -42,3 +42,6 @@ with open(r"../config.yml") as file:
         "slope_max": maxslope_limit,
         "waterlength_max": parsed_yaml_file["waterlength_max"],
     }
+    logscale = parsed_yaml_file[
+        "logscale"
+    ]  # Boolean flag for using log scale in certain plots

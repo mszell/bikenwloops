@@ -2,6 +2,11 @@
 # Use https://you.tools/slugify/ if unsure.
 study_area: fyn # provide name of study area
 
+# Provide meters per length unit.
+# If lengths are given in m, use 1.
+# If lengths are given in km, use 1000.
+mperunit: 1000
+
 # SCENARIO RESTRICTIONS
 # For now explore two scenarios:
 # 1: Family with small children
@@ -43,7 +48,5 @@ snap_threshold: 250
 # Above 30 will slow down computations.
 loop_numnode_bound: 30
 
-# mperunit: Meters per length unit
-# If lengths are given in m, use 1.
-# If lengths are given in km, use 1000.
-mperunit: 1000
+# Provide whether certain plots will use logarithmic scale.
+logscale: True
