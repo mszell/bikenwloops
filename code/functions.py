@@ -11,6 +11,15 @@ def get_vertexsize(N):
     return round(min(max(1000 / N, 1), 7))
 
 
+def get_edgewidth(L):
+    """
+    Calculate a node size for plotting given the number of links L.
+    Large values of around L>666 map to 0.5, small values L<133 to 3,
+    immediate values in-between, rounded in 0.5 steps.
+    """
+    return round(2 * min(max(333 / L, 0.5), 3)) / 2
+
+
 def getLayout(G, nodes_id, nodes_coords):
     named_vertex_list = G.vs()["name"]
     layout = []

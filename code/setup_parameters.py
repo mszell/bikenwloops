@@ -39,7 +39,7 @@ with open(r"../config.yml") as file:
     RESTRICTIONS = {
         "looplength_min": parsed_yaml_file["looplength_min"],
         "looplength_max": parsed_yaml_file["looplength_max"],
-        "slope_max": maxslope_limit,
+        "slope_max": MAXSLOPE_LIMIT,
         "waterlength_max": parsed_yaml_file["waterlength_max"],
     }
     PLOTLOGSCALE = parsed_yaml_file[
