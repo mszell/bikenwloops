@@ -49,3 +49,7 @@ with open(r"../config.yml") as file:
     MAXSLOPES_AVAILABLE = parsed_yaml_file[
         "maxslopes_available"
     ]  # Boolean flag for using available max_slope data, otherwise generating random data for testing
+
+    POIS_AVAILABLE = parsed_yaml_file[
+        "pois_available"
+    ]  # Boolean flag for using available poi data, otherwise generating random data for testing

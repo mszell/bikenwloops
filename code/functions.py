@@ -2,6 +2,15 @@ def NormalizeData(data):
     return list((data - np.min(data)) / (np.max(data) - np.min(data)))
 
 
+def get_vertexsize(N):
+    """
+    Calculate a node size for plotting given the number of nodes N.
+    Large values of around N>666 map to 1, small values N<154 to 7,
+    immediate values in-between.
+    """
+    return round(min(max(1000 / N, 1), 7))
+
+
 def getLayout(G, nodes_id, nodes_coords):
     named_vertex_list = G.vs()["name"]
     layout = []
