@@ -19,7 +19,7 @@ with open(r"../config.yml") as file:
             os.mkdir(folder)
 
     maxslope_limit = parsed_yaml_file["maxslope_limit"]
-    mperunit = parsed_yaml_file["mperunit"]
+    MPERUNIT = parsed_yaml_file["mperunit"]
     faceloop_limit = [  # 90% of face loop lengths should conform to these length limits [m]
         parsed_yaml_file["faceloop_limit_lower"],
         parsed_yaml_file["faceloop_limit_upper"],
