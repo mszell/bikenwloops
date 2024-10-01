@@ -45,3 +45,7 @@ with open(r"../config.yml") as file:
     logscale = parsed_yaml_file[
         "logscale"
     ]  # Boolean flag for using log scale in certain plots
+
+    MAXSLOPES_AVAILABLE = parsed_yaml_file[
+        "maxslopes_available"
+    ]  # Boolean flag for using available max_slope data, otherwise generating random data for testing

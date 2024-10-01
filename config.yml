@@ -1,11 +1,11 @@
 # Provide the name of the study area/project as a slug.
 # Use https://you.tools/slugify/ if unsure.
-study_area: fyn # provide name of study area
+study_area: denmark # provide name of study area
 
 # Provide meters per length unit.
 # If lengths are given in m, use 1.
 # If lengths are given in km, use 1000.
-mperunit: 1000
+mperunit: 1
 
 # SCENARIO RESTRICTIONS
 # For now explore two scenarios:
@@ -50,3 +50,8 @@ loop_numnode_bound: 30
 
 # Provide whether certain plots will use logarithmic scale.
 logscale: True
+
+# If edge data has a max_slope attribute, set this to True.
+# Otherwise, or for testing purposes, set to False. This
+# will then generate random max_slope values.
+maxslopes_available: False
