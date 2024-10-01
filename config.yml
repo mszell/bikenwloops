@@ -49,7 +49,7 @@ snap_threshold: 250
 loop_numnode_bound: 30
 
 # Provide whether certain plots will use logarithmic scale.
-logscale: True
+plotlogscale: True
 
 # If edge data has a max_slope attribute, set this to True.
 # Otherwise, or for testing purposes, set to False. This
