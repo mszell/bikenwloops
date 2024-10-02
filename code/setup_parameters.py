@@ -8,7 +8,7 @@ with open(r"../config.yml") as file:
     STUDY_AREA = parsed_yaml_file["study_area"]
 
     PATH = {
-        "data_in_network": "../data/input/" + STUDY_AREA + "/network/",
+        "data_in_network": "../data/input/" + STUDY_AREA + "/network/processed/",
         "data_in_pois": "../data/input/" + STUDY_AREA + "/point/",
         "data_out": "../data/processed/" + STUDY_AREA + "/",
         "plot": "../plots/" + STUDY_AREA + "/",
