@@ -14,7 +14,7 @@ First clone the repository:
 git clone https://github.com/mszell/bikenwloops
 ```
 
-Go to the cloned folder and create a new virtual environment via `conda` or `mamba` using the `environment.yml` file:
+Go to the cloned folder and create a new virtual environment via `mamba` using the `environment.yml` file:
 
 ```
 mamba env create -f environment.yml
@@ -37,8 +37,8 @@ Data of the knudepunkter network comes from [BikeNodePlanner: Data for Denmark](
 ### Step 1: Extract data with BikeNodePlanner: Data for Denmark
 
 - Use [BikeNodePlanner: Data for Denmark](https://github.com/anastassiavybornova/bike-node-planner-data-denmark)
-- Uncomment the municipalities of your study area in `config-municipalities.yml`
-- Set all values in `config-layers-polygon.yml` to `ignore`
+- Uncomment the municipalities of your study area in `config-municipalities.yml`. Several config files are already prepared for copy-pasting in the [`retrieval/`](retrieval/) folder for large study areas like Jutland or Zealand.
+- Set all values in `config-layers-polygon.yml` to `ignore`. This file is already [prepared](retrieval/config-layers-polygon.yml) for copy-pasting.
 - Run the `run.sh` script
 - Copy all subfolders of `/input-for-bike-node-planner/` into the `/data/input/` folder of bike-node-planner
 
@@ -61,6 +61,7 @@ Data of the knudepunkter network comes from [BikeNodePlanner: Data for Denmark](
 │   └── raw                 <- Original, immutable data
 ├── dissemination           <- Material for dissemination
 ├── plots                   <- Generated figures
+├── retrieval               <- Config files for retrieving data
 ├── .gitignore              <- Files and folders ignored by git
 ├── .pre-commit-config.yaml <- Pre-commit hooks used
 ├── LICENSE.txt

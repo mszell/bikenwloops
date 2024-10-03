@@ -1,0 +1,43 @@
+"land_anvendelse":
+  "Løvtræ": ignore
+  "Blandet": ignore
+  "Sandklit": ignore
+  "Dyrkede afgrøder på marker": ignore
+  "Lav bebyggelse": ignore
+  "Afgræssede marker": ignore
+  "Skov": ignore
+  "Braklagte marker": ignore
+  "Sø": ignore
+  "Vådområde": ignore
+  "Sommerhusområde skov": ignore
+  "Sommerhusområde": ignore
+  "Andre": ignore
+  "Hede": ignore
+  "Sportsanlæg": ignore
+  "Råstofområde": ignore
+  "Gartneri": ignore
+  "Nåletræ": ignore
+  "Kratbevoksning": ignore
+  "Erhverv": ignore
+  "Bykerne": ignore
+  "Energiforsyningsanlæg": ignore
+  "Militært anlæg": ignore
+  "Høj bebyggelse": ignore
+  "Lufthavn": ignore
+  "Affaldsanlæg": ignore
+
+"land_beskyttnatur_flade":
+  "Beskyttet natur": ignore
+
+"land_frednatpark":
+  "Fredet område": ignore
+  "Bekendtgørelsesfredning": ignore
+  "Naturnationalpark": ignore
+  "Naturpark": ignore
+  "Nationalpark": ignore
+
+"land_vaerdifuld":
+  "Værdifuldt kulturmiljø": ignore
+  "Bevaringsværdig landskab": ignore
+  "Kulturhistorisk bevaringsværdi": ignore
+  "Naturbeskyttelsesområde": ignore
