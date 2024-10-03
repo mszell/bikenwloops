@@ -59,4 +59,4 @@ maxslopes_available: False
 # If pois files are available, set this to True.
 # Otherwise, or for testing purposes, set to False. This
 # will then generate random poi values.
-pois_available: False
+pois_available: True
