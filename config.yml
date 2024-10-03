@@ -1,6 +1,6 @@
 # Provide the name of the study area/project as a slug.
 # Use https://you.tools/slugify/ if unsure.
-study_area: denmark # provide name of study area
+study_area: funen # provide name of study area
 
 # Provide meters per length unit.
 # If lengths are given in m, use 1.

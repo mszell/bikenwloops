@@ -58,15 +58,15 @@ kommunekode:
   #- "0480" # Nordfyns
   #- "0482" # Langeland
   #- "0492" # Ærø
-  #- "0510" # Haderslev
-  #- "0530" # Billund
-  #- "0540" # Sønderborg
-  #- "0550" # Tønder
-  #- "0561" # Esbjerg
+  - "0510" # Haderslev
+  - "0530" # Billund
+  - "0540" # Sønderborg
+  - "0550" # Tønder
+  - "0561" # Esbjerg
   #- "0563" # Fanø
-  #- "0573" # Varde
-  #- "0575" # Vejen
-  #- "0580" # Aabenraa
+  - "0573" # Varde
+  - "0575" # Vejen
+  - "0580" # Aabenraa
   - "0607" # Fredericia
   - "0615" # Horsens
   - "0621" # Kolding

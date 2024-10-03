@@ -42,7 +42,7 @@ kommunekode:
   - "0336" # Stevns
   - "0340" # Sorø
   - "0350" # Lejre
-  - "0360" # Lolland
+  #- "0360" # Lolland
   - "0370" # Næstved
   #- "0376" # Guldborgsund
   - "0390" # Vordingborg
