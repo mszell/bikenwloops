@@ -1,6 +1,6 @@
 # Provide the name of the study area/project as a slug.
 # Use https://you.tools/slugify/ if unsure.
-study_area: funen # provide name of study area
+study_area: longland # provide name of study area
 
 # Provide meters per length unit.
 # If lengths are given in m, use 1.
@@ -13,10 +13,10 @@ mperunit: 1
 # 2: Teenage/adult leisure cyclist
 
 # Provide the maximum acceptable gradient, in %.
-maxslope_limit: 4 # 4 / 6
+maxslope_limit: 6 # 4 / 6
 # Provide the minimum and maximum loop length, in meters.
-looplength_min: 5000 # 5000 / 10000
-looplength_max: 20000 # 20000 / 40000
+looplength_min: 10000 # 5000 / 10000
+looplength_max: 40000 # 20000 / 40000
 
 # SPECIFICATION PARAMETERS
 # These parameters come from the DKNT specification at:
