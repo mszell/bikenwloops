@@ -54,7 +54,7 @@ plotlogscale: True
 # If edge data has a max_slope attribute, set this to True.
 # Otherwise, or for testing purposes, set to False. This
 # will then generate random max_slope values.
-maxslopes_available: False
+maxslopes_available: True
 
 # If pois files are available, set this to True.
 # Otherwise, or for testing purposes, set to False. This

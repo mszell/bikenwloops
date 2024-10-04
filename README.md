@@ -42,15 +42,14 @@ Data of the knudepunkter network comes from [BikeNodePlanner: Data for Denmark](
 - Run the `run.sh` script
 - Copy all subfolders of `/input-for-bike-node-planner/` into the `/data/input/` folder of bike-node-planner
 
-### Step 2: Generate network data with BikeNodePlanner
+### Step 2: Add elevation data with BikeNodePlanner
+
+This step is needed to add elevation data (from `dem/dem.tif`) to the edges, creating an `edges_slope.gpkg` file.
 
 - Use [BikeNodePlanner](https://github.com/anastassiavybornova/bike-node-planner)
 - Run scripts 01 to 04
-- TO DO: Network simplification?
-- Let's call `loopspath` the data/input path to your project, for example `bikenwloops/data/input/fyn/`
-- Copy the file `nodes.gpkg` from `bike-node-planner/data/output/network` into `loopspath/network`
-- Copy the file `edges_slope.gpkg` from `bike-node-planner/data/output/elevation` into `loopspath/network`
-- Copy the whole folder `/input-for-bike-node-planner/point/` into `loopspath`
+- Let's call `loopspath` the data/input path to your project, for example `bikenwloops/data/input/funen/`
+- Copy the file `edges_slope.gpkg` from `bike-node-planner/data/output/elevation` into `loopspath/network/processed/`
 
 ## Repository structure
 
