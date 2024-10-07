@@ -12,6 +12,8 @@ import lzma
 import shapely
 from itertools import combinations, compress
 
+np.random.seed(42)
+
 with open(r"../config.yml") as file:
     parsed_yaml_file = yaml.load(file, Loader=yaml.FullLoader)
 
