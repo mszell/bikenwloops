@@ -1,8 +1,8 @@
-def NormalizeData(data):
+def normalize_data(data):
     return list((data - np.min(data)) / (np.max(data) - np.min(data)))
 
 
-def get_vertexsize(N):
+def get_vertex_size_constant(N):
     """
     Calculate a constant node size for plotting given the number of
     nodes N. Large values of around N>666 map to 1, small values
@@ -20,7 +20,7 @@ def get_edgewidth(L):
     return round(2 * min(max(333 / L, 0.5), 3)) / 2
 
 
-def getLayout(G, nodes_id, nodes_coords):
+def get_layout(G, nodes_id, nodes_coords):
     named_vertex_list = G.vs()["name"]
     layout = []
     for n in named_vertex_list:
@@ -32,9 +32,9 @@ def getLayout(G, nodes_id, nodes_coords):
     return layout
 
 
-def plotCheck(G, nodes_id, nodes_coords, vertex_size=7, edge_width=2, edge_color=None):
+def plot_check(G, nodes_id, nodes_coords, vertex_size=7, edge_width=2, edge_color=None):
     fig, ax = plt.subplots()
-    layout = getLayout(G, nodes_id, nodes_coords)
+    layout = get_layout(G, nodes_id, nodes_coords)
     if edge_color is None:
         ig.plot(
             G,
@@ -57,7 +57,7 @@ def plotCheck(G, nodes_id, nodes_coords, vertex_size=7, edge_width=2, edge_color
     return fig
 
 
-def getLoopLength(c):
+def get_loop_length(c):
     l = 0
     cl = len(c)
     for i in range(cl):
@@ -65,7 +65,7 @@ def getLoopLength(c):
     return l
 
 
-def getLoopMaxSlope(c):
+def get_loop_max_slope(c):
     ms = 0
     cl = len(c)
     for i in range(cl):
@@ -73,7 +73,7 @@ def getLoopMaxSlope(c):
     return ms
 
 
-def getLoopPOIDiversity(c):
+def get_loop_poi_diversity(c):
     pd = [0, 0, 0]  # facilities, services, attractions
     cl = len(c)
     for i in range(cl):
@@ -85,7 +85,7 @@ def getLoopPOIDiversity(c):
     return sum(pd)
 
 
-def getLoopWaterProfile(c):
+def get_loop_water_profile(c):
     wp = tuple()
     cl = len(c)
     l = 0
@@ -100,7 +100,7 @@ def getLoopWaterProfile(c):
     return wp
 
 
-def maskNode(nodeloopinfo, mask):
+def mask_node(nodeloopinfo, mask):
     return {
         "loops": list(compress(nodeloopinfo["loops"], mask)),
         "lengths": list(compress(nodeloopinfo["lengths"], mask)),
@@ -110,7 +110,7 @@ def maskNode(nodeloopinfo, mask):
     }
 
 
-def getVertexSizes(loopinfo, max_node_size=20):
+def get_vertex_sizes(loopinfo, max_node_size=20):
     """
     Calculate a node size for each node in the loopinfo dict
     for plotting given the number of loops in the node. The
