@@ -11,13 +11,35 @@ def get_vertex_size_constant(N):
     return round(min(max(1000 / N, 1), 7))
 
 
-def get_edgewidth(L):
+def get_edgewidth_constant(L):
     """
     Calculate a constant link size for plotting given the number of
     links L. Large values of around L>666 map to 0.5, small values
     L<133 to 3, immediate values in-between, rounded in 0.5 steps.
     """
     return round(2 * min(max(333 / L, 0.5), 3)) / 2
+
+
+def get_vertex_sizes(loopinfo, max_node_size=20):
+    """
+    Calculate a node size for each node in the loopinfo dict
+    for plotting given the number of loops in the node. The
+    largest value gets size max_node_size.
+    Returns a list of node sizes (floats).
+    """
+    vertex_sizes = []
+    for k in range(len(loopinfo.keys())):
+        try:
+            if PLOTLOGSCALE:
+                vertex_sizes.append(np.log2(len(loopinfo[k]["loops"]) + 1.01))
+            else:
+                vertex_sizes.append(len(loopinfo[k]["loops"]))
+        except:
+            vertex_sizes.append(0)
+
+    numloops_max = max(vertex_sizes)
+    vertex_sizes = [i / (numloops_max / max_node_size) for i in vertex_sizes]
+    return vertex_sizes, numloops_max
 
 
 def get_layout(G, nodes_id, nodes_coords):
@@ -108,25 +130,3 @@ def mask_node(nodeloopinfo, mask):
         "water_profile": list(compress(nodeloopinfo["water_profile"], mask)),
         "poi_diversity": list(compress(nodeloopinfo["poi_diversity"], mask)),
     }
-
-
-def get_vertex_sizes(loopinfo, max_node_size=20):
-    """
-    Calculate a node size for each node in the loopinfo dict
-    for plotting given the number of loops in the node. The
-    largest value gets size max_node_size.
-    Returns a list of node sizes (floats).
-    """
-    vertex_sizes = []
-    for k in range(len(loopinfo.keys())):
-        try:
-            if PLOTLOGSCALE:
-                vertex_sizes.append(np.log2(len(loopinfo[k]["loops"]) + 1.01))
-            else:
-                vertex_sizes.append(len(loopinfo[k]["loops"]))
-        except:
-            vertex_sizes.append(0)
-
-    numloops_max = max(vertex_sizes)
-    vertex_sizes = [i / (numloops_max / max_node_size) for i in vertex_sizes]
-    return vertex_sizes, numloops_max
