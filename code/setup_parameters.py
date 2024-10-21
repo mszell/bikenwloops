@@ -48,6 +48,9 @@ with open(r"../config.yml") as file:
     LOOP_NUMNODE_BOUND = parsed_yaml_file[
         "loop_numnode_bound"
     ]  # From 30 it starts getting slow
+    LOOP_LENGTH_BOUND = parsed_yaml_file[
+        "loop_length_bound"
+    ]  # Physical length threshold in meters
 
     RESTRICTIONS = {
         "looplength_min": parsed_yaml_file["looplength_min"],

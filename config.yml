@@ -1,6 +1,6 @@
 # Provide the name of the study area/project as a slug.
 # Use https://you.tools/slugify/ if unsure.
-study_area: bornholm # provide name of study area
+study_area: longland # provide name of study area
 
 # Provide meters per length unit.
 # If lengths are given in m, use 1.
@@ -47,6 +47,10 @@ snap_threshold: 250
 # Provide the maximum number of nodes in a loop.
 # Above 30 will slow down computations.
 loop_numnode_bound: 30
+
+# Provide the maximum physical length in a loop, in meters.
+# Set to 0 for no limit.
+loop_length_bound: 0
 
 # Provide whether certain plots will use logarithmic scale.
 plotlogscale: True
