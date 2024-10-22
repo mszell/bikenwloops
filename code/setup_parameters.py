@@ -26,9 +26,9 @@ edge_classification_colors = {
 }
 
 loop_classification_colors = {
-    "too_short": "0,0,0,128",
-    "ideal_range": "0,203,0,128",
-    "too_long": "225,0,0,128",
+    "too_short": "#3182bd",
+    "ideal_range": "#bdd7e7",
+    "too_long": "#fd8d3c",
 }
 
 with open(r"../config.yml") as file:
