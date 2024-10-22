@@ -7,10 +7,10 @@ study_area_combined:
   denmark:
     - bornholm
     - funen
-    # - jutland
-    # - lollandfalster
+    - jutland
+    - lollandfalster
     - longland
-    # - zealand
+    - zealand
 
 # Provide meters per length unit.
 # If lengths are given in m, use 1.
@@ -77,5 +77,5 @@ pois_available: True
 
 # Provide by how many m to shift Bornholm to east and north
 bornholm_delta:
-  - -200000 # east
-  - 200000 # north
+  - -220000 # east
+  - 120000 # north
