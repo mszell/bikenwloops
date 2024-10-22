@@ -1,6 +1,16 @@
 # Provide the name of the study area/project as a slug.
 # Use https://you.tools/slugify/ if unsure.
-study_area: longland # provide name of study area
+study_area: denmark
+
+# If using a combined study area, specify it here.
+study_area_combined:
+  denmark:
+    - bornholm
+    - funen
+    # - jutland
+    # - lollandfalster
+    - longland
+    # - zealand
 
 # Provide meters per length unit.
 # If lengths are given in m, use 1.
@@ -50,7 +60,7 @@ loop_numnode_bound: 30
 
 # Provide the maximum physical length in a loop, in meters.
 # Set to 0 for no limit.
-loop_length_bound: 0
+loop_length_bound: 40000
 
 # Provide whether certain plots will use logarithmic scale.
 plotlogscale: True
@@ -64,3 +74,8 @@ maxslopes_available: True
 # Otherwise, or for testing purposes, set to False. This
 # will then generate random poi values.
 pois_available: True
+
+# Provide by how many m to shift Bornholm to east and north
+bornholm_delta:
+  - -200000 # east
+  - 200000 # north

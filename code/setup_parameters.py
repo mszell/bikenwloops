@@ -4,16 +4,32 @@ from tqdm.notebook import tqdm
 import geopandas as gpd
 import igraph as ig
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 import numpy as np
+import momepy as momepy
 import networkx as nx
 from functools import reduce
 import pickle
 import lzma
 import shapely
+from shapely import LineString
 from itertools import combinations, compress
 from statistics import median
 
 np.random.seed(42)
+
+edge_classification_colors = {
+    "too_short": "#000000",
+    "ideal_range": "#00CB00",
+    "above_ideal": "#FFB900",
+    "too_long": "#E10000",
+}
+
+loop_classification_colors = {
+    "too_short": "0,0,0,128",
+    "ideal_range": "0,203,0,128",
+    "too_long": "225,0,0,128",
+}
 
 with open(r"../config.yml") as file:
     parsed_yaml_file = yaml.load(file, Loader=yaml.FullLoader)
@@ -26,10 +42,22 @@ with open(r"../config.yml") as file:
         "data_out": "../data/processed/" + STUDY_AREA + "/",
         "plot": "../plots/" + STUDY_AREA + "/",
     }
-
     for folder in PATH.values():
         if not os.path.exists(folder):
-            os.mkdir(folder)
+            os.makedirs(folder)
+
+    STUDY_AREA_COMBINED = parsed_yaml_file["study_area_combined"]
+    if STUDY_AREA in STUDY_AREA_COMBINED:  # create a nested path
+        PATH = {}
+        PATH["plot"] = "../plots/" + STUDY_AREA + "/"
+        PATH["data_out"] = "../data/processed/" + STUDY_AREA + "/"
+        for subarea in STUDY_AREA_COMBINED[STUDY_AREA]:
+            PATH[subarea] = {
+                "data_in_network": "../data/input/" + subarea + "/network/processed/",
+                "data_in_pois": "../data/input/" + subarea + "/point/",
+                "data_out": "../data/processed/" + subarea + "/",
+                "plot": "../plots/" + subarea + "/",
+            }
 
     MAXSLOPE_LIMIT = parsed_yaml_file["maxslope_limit"]
     MPERUNIT = parsed_yaml_file["mperunit"]
@@ -69,3 +97,5 @@ with open(r"../config.yml") as file:
     POIS_AVAILABLE = parsed_yaml_file[
         "pois_available"
     ]  # Boolean flag for using available poi data, otherwise generating random data for testing
+
+    BORNHOLM_DELTA = parsed_yaml_file["bornholm_delta"]
