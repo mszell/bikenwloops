@@ -114,4 +114,14 @@ plotparam:
     "easy": 0.75
     "medium": 1
     "hard": 1.25
+  poidiversity_classification_colors:
+    0: "#de2d26"
+    1: "#6baed6"
+    2: "#3182bd"
+    3: "#08519c"
+  poidiversity_classification_linewidths:
+    0: 1.25
+    1: 0.75
+    2: 0.75
+    3: 0.75
   dpi: 96
