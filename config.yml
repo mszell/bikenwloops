@@ -1,6 +1,6 @@
 # Provide the name of the study area/project as a slug.
 # Use https://you.tools/slugify/ if unsure.
-study_area: denmark
+study_area: longland
 
 # If using a combined study area, specify it here.
 study_area_combined:
@@ -19,14 +19,23 @@ mperunit: 1
 
 # SCENARIO RESTRICTIONS
 # For now explore two scenarios:
-# 1: Family with small children
-# 2: Teenage/adult leisure cyclist
+# 0: Family with small children
+# 1: Teenage/adult leisure cyclist
+scenarioid: 0
 
-# Provide the maximum acceptable gradient, in %.
-maxslope_limit: 6 # 4 / 6
-# Provide the minimum and maximum loop length, in meters.
-looplength_min: 10000 # 5000 / 10000
-looplength_max: 40000 # 20000 / 40000
+scenario:
+  - name: "Family with children" # 0
+    # Provide the maximum acceptable gradient, in %.
+    maxslope_limit: 4
+    # Provide the minimum and maximum loop length, in meters.
+    looplength_min: 5000
+    looplength_max: 20000
+  - name: "Adult leisure cyclist" # 1
+    # Provide the maximum acceptable gradient, in %.
+    maxslope_limit: 6
+    # Provide the minimum and maximum loop length, in meters.
+    looplength_min: 10000
+    looplength_max: 40000
 
 # SPECIFICATION PARAMETERS
 # These parameters come from the DKNT specification at:

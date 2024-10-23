@@ -47,7 +47,6 @@ with open(r"../config.yml") as file:
                 "plot": "../plots/" + subarea + "/",
             }
 
-    MAXSLOPE_LIMIT = parsed_yaml_file["maxslope_limit"]
     MPERUNIT = parsed_yaml_file["mperunit"]
     FACELOOP_LIMIT = [  # 90% of face loop lengths should conform to these length limits [m]
         parsed_yaml_file["faceloop_limit_lower"],
@@ -58,6 +57,16 @@ with open(r"../config.yml") as file:
         parsed_yaml_file["link_limit_upper"],
         parsed_yaml_file["link_limit_max"],
     ]
+    LINK_LIMIT = [  # Optimal length between first and second value, maximal length the last value [m]
+        parsed_yaml_file["link_limit_lower"],
+        parsed_yaml_file["link_limit_upper"],
+        parsed_yaml_file["link_limit_max"],
+    ]
+    WATERLENGTH_MAX = parsed_yaml_file["waterlength_max"]
+
+    SCENARIOID = parsed_yaml_file["scenarioid"]
+    SCENARIO = parsed_yaml_file["scenario"]  # List of scenario parameters
+
     SNAP_THRESHOLD = parsed_yaml_file[
         "snap_threshold"
     ]  # Threshold to snap POIs to network links [m]
@@ -68,12 +77,6 @@ with open(r"../config.yml") as file:
         "loop_length_bound"
     ]  # Physical length threshold in meters
 
-    RESTRICTIONS = {
-        "looplength_min": parsed_yaml_file["looplength_min"],
-        "looplength_max": parsed_yaml_file["looplength_max"],
-        "slope_max": MAXSLOPE_LIMIT,
-        "waterlength_max": parsed_yaml_file["waterlength_max"],
-    }
     PLOTLOGSCALE = parsed_yaml_file[
         "plotlogscale"
     ]  # Boolean flag for using log scale in certain plots
