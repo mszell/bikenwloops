@@ -1,6 +1,6 @@
 # Provide the name of the study area/project as a slug.
 # Use https://you.tools/slugify/ if unsure.
-study_area: longland
+study_area: denmark
 
 # If using a combined study area, specify it here.
 study_area_combined:
@@ -106,4 +106,12 @@ plotparam:
     "below_ideal": "#3182bd"
     "ideal_range": "#bdd7e7"
     "too_long": "#de2d26"
+  maxslope_classification_colors:
+    "easy": "#bdd7e7"
+    "medium": "#fd8d3c"
+    "hard": "#de2d26"
+  maxslope_classification_linewidths:
+    "easy": 0.75
+    "medium": 1
+    "hard": 1.25
   dpi: 96

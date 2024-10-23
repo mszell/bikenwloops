@@ -213,6 +213,22 @@ def classify_looplength(length_km, loop_length_min, loop_length_max):
     return classification
 
 
+def classify_maxslope(maxslope, maxslope_medium, maxslope_hard):
+    """
+    maxslope: maximum gradient in %
+    """
+    assert maxslope_medium < maxslope_hard, "Please provide valid maxslope ranges"
+
+    if maxslope < maxslope_medium:
+        classification = "easy"
+    elif maxslope < maxslope_hard:
+        classification = "medium"
+    else:
+        classification = "hard"
+
+    return classification
+
+
 def rgb2hex(rgb_string):
     return "#%02x%02x%02x" % tuple([int(n) for n in rgb_string.split(",")])[0:3]
 
