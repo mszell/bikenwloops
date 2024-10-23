@@ -43,7 +43,7 @@ def get_vertex_sizes(loopinfo, max_node_size=20):
 
 
 def lighten_color(color, amount=0.5):
-    # Source: https://stackoverflow.com/questions/37765197/darken-or-lighten-a-color-in-matplotlib
+    # Source: https://stackoverflow.com/a/49601444
     """
     Lightens the given color by multiplying (1-luminosity) by the given amount.
     Input can be matplotlib color string, hex string, or RGB tuple.

@@ -18,18 +18,6 @@ from statistics import median
 
 np.random.seed(42)
 
-edge_classification_colors = {
-    "too_short": "#000000",
-    "ideal_range": "#00CB00",
-    "above_ideal": "#FFB900",
-    "too_long": "#E10000",
-}
-
-loop_classification_colors = {
-    "too_short": "#3182bd",
-    "ideal_range": "#bdd7e7",
-    "too_long": "#fd8d3c",
-}
 
 with open(r"../config.yml") as file:
     parsed_yaml_file = yaml.load(file, Loader=yaml.FullLoader)
@@ -99,3 +87,5 @@ with open(r"../config.yml") as file:
     ]  # Boolean flag for using available poi data, otherwise generating random data for testing
 
     BORNHOLM_DELTA = parsed_yaml_file["bornholm_delta"]
+
+    PLOTPARAM = parsed_yaml_file["plotparam"]  # Dict of plotting parameters
