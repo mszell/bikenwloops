@@ -184,7 +184,7 @@ def classify_edgelength(length_km, ideal_length_lower, ideal_length_upper, max_l
     ), "Please provide valid length ranges"
 
     if length_km < ideal_length_lower:
-        classification = "too_short"
+        classification = "below_ideal"
     elif length_km < ideal_length_upper:
         classification = "ideal_range"
     elif length_km < max_length:
@@ -204,7 +204,7 @@ def classify_looplength(length_km, loop_length_min, loop_length_max):
     assert loop_length_min < loop_length_max, "Please provide valid length ranges"
 
     if length_km < loop_length_min:
-        classification = "too_short"
+        classification = "below_ideal"
     elif length_km < loop_length_max:
         classification = "ideal_range"
     else:
@@ -228,7 +228,7 @@ def plot_edge_lengths(homepath, edge_classification_colors):
     max_length = config["max_length"]
 
     edge_classification_labels = {
-        "too_short": f"(<{ideal_length_lower}km)",
+        "below_ideal": f"(<{ideal_length_lower}km)",
         "ideal_range": f"({ideal_length_lower}-{ideal_length_upper}km)",
         "above_ideal": f"({ideal_length_upper}-{max_length}km)",
         "too_long": f"(>{max_length}km)",
@@ -268,7 +268,7 @@ def plot_loop_lengths(homepath, loop_classification_colors):
     [loop_length_min, loop_length_max] = config["loop_length_range"]
 
     loop_classification_labels = {
-        "too_short": f"(<{loop_length_min}km)",
+        "below_ideal": f"(<{loop_length_min}km)",
         "ideal_range": f"({loop_length_min}-{loop_length_max}km)",
         "too_long": f"(>{loop_length_max}km)",
     }

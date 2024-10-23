@@ -81,14 +81,20 @@ bornholm_delta:
   - 120000 # north
 
 # PLOT PARAMETERS
+# https://colorbrewer2.org
 plotparam:
   edge_classification_colors:
-    "too_short": "#000000"
-    "ideal_range": "#00CB00"
-    "above_ideal": "#FFB900"
-    "too_long": "#E10000"
-  loop_classification_colors:
-    "too_short": "#3182bd"
+    "below_ideal": "#000000"
     "ideal_range": "#bdd7e7"
-    "too_long": "#fd8d3c"
+    "above_ideal": "#3182bd"
+    "too_long": "#de2d26"
+  edge_classification_linewidths:
+    "below_ideal": 1.25
+    "ideal_range": 0.75
+    "above_ideal": 1.25
+    "too_long": 2.5
+  loop_classification_colors:
+    "below_ideal": "#3182bd"
+    "ideal_range": "#bdd7e7"
+    "too_long": "#de2d26"
   dpi: 96
