@@ -92,6 +92,7 @@ bornholm_delta:
 # PLOT PARAMETERS
 # https://colorbrewer2.org
 plotparam:
+  dpi: 96
   edge_classification_colors:
     "below_ideal": "#000000"
     "ideal_range": "#bdd7e7"
@@ -124,4 +125,3 @@ plotparam:
     1: 0.75
     2: 0.75
     3: 0.75
-  dpi: 96
