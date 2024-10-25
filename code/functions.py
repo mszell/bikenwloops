@@ -31,15 +31,45 @@ def get_vertex_sizes(loopinfo, max_node_size=20):
     for k in range(len(loopinfo.keys())):
         try:
             if PLOTLOGSCALE:
-                vertex_sizes.append(np.log2(len(loopinfo[k]["loops"]) + 1.01))
+                vertex_sizes.append(np.log2(len(loopinfo[k]["loops"]) + 1.00001))
             else:
-                vertex_sizes.append(len(loopinfo[k]["loops"]))
+                # if linear, make it the marker's area, so take the sqrt
+                vertex_sizes.append(math.sqrt(len(loopinfo[k]["loops"])))
         except:
             vertex_sizes.append(0)
 
     numloops_max = max(vertex_sizes)
     vertex_sizes = [i / (numloops_max / max_node_size) for i in vertex_sizes]
     return vertex_sizes, numloops_max
+
+
+def get_vertex_plotinfo(loopinfo, max_node_size=20):
+    """
+    Calculate a node size and color for each node in the loopinfo
+    dict for plotting given the number of loops in the node. The
+    largest value gets size max_node_size.
+    """
+    cmap = mpl.colormaps["viridis"].resampled(8)
+    cmaparr = cmap(np.linspace(0, 1, 8))
+    # cmaparr = np.vstack((cmaparr, np.repeat(cmaparr[-1:, :], 10, axis=0)))
+    cmaparr = np.vstack((cmaparr, np.repeat([[1, 1, 1, 1]], 10, axis=0)))  # white
+
+    vertex_sizes = []
+    vertex_colors = np.zeros((len(loopinfo.keys()), 4))
+    for k in range(len(loopinfo.keys())):
+        try:
+            if PLOTLOGSCALE:
+                val = np.log2(len(loopinfo[k]["loops"]) + 1.00001)
+                vertex_sizes.append(math.sqrt(val))
+                vertex_colors[k, :] = cmaparr[math.floor(val), :]
+            else:
+                # if linear, make it the marker's area, so take the sqrt
+                vertex_sizes.append(math.sqrt(len(loopinfo[k]["loops"])))
+        except:
+            vertex_sizes.append(0)
+
+    vertex_sizes = [i / (18 / max_node_size) for i in vertex_sizes]
+    return vertex_sizes, vertex_colors
 
 
 def lighten_color(color, amount=0.5):
@@ -79,6 +109,34 @@ def get_layout(G, nodes_id, nodes_coords, mode="single"):
                 print("There was an invalid node with name: " + str(n))
             layout.append(nodes_coords[pos])
         return layout
+
+
+def plot_dk_gdf(
+    nodes,
+    edges,
+    scale=1,
+    vertex_size=7,
+    vertex_color="#009F92",
+    link_width=2,
+    link_color="#009F92",
+):
+    fig = plt.figure(
+        figsize=(scale * 640 / PLOTPARAM["dpi"], scale * 760 / PLOTPARAM["dpi"]),
+        dpi=PLOTPARAM["dpi"],
+    )
+    ax = fig.add_axes(
+        [-0.03, -0.03, 1.06, 1.06]
+    )  # negative because plot() introduces a padding
+    nodes.plot(
+        ax=ax,
+        markersize=vertex_size,
+        alpha=1,
+        color=vertex_color,
+        edgecolor="#666666",
+        linewidth=0.6,
+    )
+    edges.plot(ax=ax, zorder=0, linewidth=link_width, color=link_color)
+    ax.set_axis_off()
 
 
 def plot_check(

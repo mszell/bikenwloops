@@ -3,6 +3,7 @@ import yaml
 from tqdm.notebook import tqdm
 import geopandas as gpd
 import igraph as ig
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 import numpy as np
@@ -15,6 +16,7 @@ import shapely
 from shapely import LineString
 from itertools import combinations, compress
 from statistics import median
+import math
 
 np.random.seed(42)
 
