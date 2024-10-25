@@ -21,7 +21,7 @@ mperunit: 1
 # For now explore two scenarios:
 # 0: Family with small children
 # 1: Teenage/adult leisure cyclist
-scenarioid: 1
+scenarioid: 0
 
 scenario:
   - name: "Family with children" # 0
@@ -93,6 +93,9 @@ bornholm_delta:
 # https://colorbrewer2.org
 plotparam:
   dpi: 96
+  color:
+    "neutral": "#444444"
+    "dknt_green": "#009F92"
   edge_classification_colors:
     "below_ideal": "#000000"
     "ideal_range": "#bdd7e7"
