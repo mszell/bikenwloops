@@ -43,7 +43,7 @@ def get_vertex_sizes(loopinfo, max_node_size=20):
     return vertex_sizes, numloops_max
 
 
-def get_vertex_plotinfo(loopinfo, max_node_size=20, bit_threshold=8):
+def get_vertex_plotinfo(loopinfo, max_node_size=100, bit_threshold=8):
     """
     Calculate a node size and color for each node in the loopinfo
     dict for plotting given the number of loops in the node. The
@@ -69,14 +69,16 @@ def get_vertex_plotinfo(loopinfo, max_node_size=20, bit_threshold=8):
                 val = np.clip(
                     math.ceil(np.log2(len(loopinfo[k]["loops"]))), 0, bit_threshold + 1
                 )
-                vertex_sizes.append(math.sqrt(val))
-                vertex_colors[k, :] = cmaparr[val - 1, :]
+                vertex_sizes.append(math.sqrt(val) + 2)
+                vertex_colors[k, :] = cmaparr[val, :]
             else:
                 vertex_sizes.append(math.sqrt(len(loopinfo[k]["loops"])))
         except:
-            vertex_sizes.append(0)
+            val = 0
+            vertex_sizes.append(math.sqrt(val) + 2)
+            vertex_colors[k, :] = [1, 1, 1, 1]
 
-    vertex_sizes = [i / (maxbits / max_node_size) for i in vertex_sizes]
+    vertex_sizes = [(i - 0.5) / (maxbits / max_node_size) for i in vertex_sizes]
     return vertex_sizes, vertex_colors
 
 
