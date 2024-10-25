@@ -43,34 +43,40 @@ def get_vertex_sizes(loopinfo, max_node_size=20):
     return vertex_sizes, numloops_max
 
 
-def get_vertex_plotinfo(loopinfo, max_node_size=20):
+def get_vertex_plotinfo(loopinfo, max_node_size=20, bit_threshold=8):
     """
     Calculate a node size and color for each node in the loopinfo
     dict for plotting given the number of loops in the node. The
-    largest value gets size max_node_size.
+    node sizes are fixed, max_node_size just scales them.
+    bit_threshold is the threshold from which nodes are colored red.
     """
-    cmap = mpl.colormaps["viridis"].resampled(8)
-    cmaparr = cmap(np.linspace(0, 1, 8))
-    # cmaparr = np.vstack((cmaparr, np.repeat(cmaparr[-1:, :], 10, axis=0)))
+    maxbits = 18  # maximum value in Denmark for 30 nodes, 40km
+    cmap = mpl.colormaps["viridis"].resampled(bit_threshold)
+    cmaparr = cmap(np.linspace(0, 1, bit_threshold))
     cmaparr = np.vstack(
-        (cmaparr, np.repeat([[0.871, 0.176, 0.149, 1]], 10, axis=0))
-    )  # white
+        (
+            cmaparr,
+            np.repeat([[0.871, 0.176, 0.149, 1]], maxbits - bit_threshold, axis=0),
+        )
+    )  # red: #de2d26
 
-    vertex_sizes = []
-    vertex_colors = np.zeros((len(loopinfo.keys()), 4))
+    vertex_sizes = []  # list
+    vertex_colors = np.zeros((len(loopinfo.keys()), 4))  # numpy array
     for k in range(len(loopinfo.keys())):
         try:
+            # make the value correspond to the disk's area, so take the sqrt
             if PLOTLOGSCALE:
-                val = np.clip(math.ceil(np.log2(len(loopinfo[k]["loops"]))), 0, 9)
+                val = np.clip(
+                    math.ceil(np.log2(len(loopinfo[k]["loops"]))), 0, bit_threshold + 1
+                )
                 vertex_sizes.append(math.sqrt(val))
                 vertex_colors[k, :] = cmaparr[val - 1, :]
             else:
-                # if linear, make it the marker's area, so take the sqrt
                 vertex_sizes.append(math.sqrt(len(loopinfo[k]["loops"])))
         except:
             vertex_sizes.append(0)
 
-    vertex_sizes = [i / (18 / max_node_size) for i in vertex_sizes]
+    vertex_sizes = [i / (maxbits / max_node_size) for i in vertex_sizes]
     return vertex_sizes, vertex_colors
 
 
@@ -134,11 +140,12 @@ def plot_dk_gdf(
         markersize=vertex_size,
         alpha=1,
         color=vertex_color,
-        edgecolor="#666666",
+        edgecolor="#444444",
         linewidth=0.6,
     )
     edges.plot(ax=ax, zorder=0, linewidth=link_width, color=link_color)
     ax.set_axis_off()
+    return fig
 
 
 def plot_check(
