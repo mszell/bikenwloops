@@ -43,14 +43,7 @@ def get_vertex_sizes(loopinfo, max_node_size=20):
     return vertex_sizes, numloops_max
 
 
-def get_vertex_plotinfo(loopinfo, max_node_size=150, bit_threshold=8):
-    """
-    Calculate a node size and color for each node in the loopinfo
-    dict for plotting given the number of loops in the node. The
-    node sizes are fixed, max_node_size just scales them.
-    bit_threshold is the threshold from which nodes are colored red.
-    """
-    maxbits = 18  # maximum value in Denmark for 30 nodes, 40km
+def get_cmap(maxbits=18, bit_threshold=8):
     cmap = mpl.colormaps["viridis"].resampled(bit_threshold)
     cmaparr = cmap(np.linspace(0, 1, bit_threshold))
     cmaparr = np.vstack(
@@ -59,6 +52,17 @@ def get_vertex_plotinfo(loopinfo, max_node_size=150, bit_threshold=8):
             np.repeat([[0.871, 0.176, 0.149, 1]], maxbits - bit_threshold, axis=0),
         )
     )  # red: #de2d26
+    return cmaparr
+
+
+def get_vertex_plotinfo(loopinfo, max_node_size=150, bit_threshold=8, maxbits=18):
+    """
+    Calculate a node size and color for each node in the loopinfo
+    dict for plotting given the number of loops in the node. The
+    node sizes are fixed, max_node_size just scales them.
+    bit_threshold is the threshold from which nodes are colored red.
+    """
+    cmaparr = get_cmap(bit_threshold=bit_threshold)
 
     vertex_sizes = []  # list
     vertex_colors = np.zeros((len(loopinfo.keys()), 4))  # numpy array
@@ -76,10 +80,21 @@ def get_vertex_plotinfo(loopinfo, max_node_size=150, bit_threshold=8):
         except:
             val = 0
             vertex_sizes.append(math.sqrt(val) + 2)
-            vertex_colors[k, :] = [1, 1, 1, 1]
+            vertex_colors[k, :] = PLOTPARAM["color"]["noloop"]
 
     vertex_sizes = [(i - 1.25) / (maxbits / max_node_size) for i in vertex_sizes]
     return vertex_sizes, vertex_colors
+
+
+def get_vertex_loopnums(loopinfo):
+    numvertices = len(loopinfo.keys())
+    vals = np.zeros(numvertices)
+    for i in range(numvertices):
+        try:
+            vals[i] = len(loopinfo[i]["loops"])
+        except:
+            pass
+    return vals
 
 
 def get_link_plotinfo(
@@ -196,6 +211,73 @@ def plot_dk_gdf(
 
     ax.set_axis_off()
     return fig, ax
+
+
+def plot_dk_inset(fig, loopinfo, bit_threshold=8):
+    xmax = bit_threshold + 2
+    axes = fig.add_axes([0.64, 0.69, 0.31, 0.25])
+
+    cmaparr = get_cmap(bit_threshold=bit_threshold)
+    cmaparr = np.vstack((PLOTPARAM["color"]["noloop"], cmaparr))
+
+    loopnums = get_vertex_loopnums(loopinfo)
+
+    N, bins, patches = axes.hist(
+        loopnums,
+        bins=list(np.linspace(0, xmax, xmax + 1)),
+        density=False,
+        linewidth=0.5,
+    )
+
+    # Source: https://stackoverflow.com/a/49290555
+    patches[0].set_edgecolor(PLOTPARAM["color"]["neutral"])
+    for i in range(xmax):
+        patches[i].set_facecolor(cmaparr[i, :])
+
+    # Source: https://stackoverflow.com/a/51050772
+    n_upper_outliers = (loopnums > bit_threshold).sum()
+    patches[-1].set_height(patches[-1].get_height() + n_upper_outliers)
+
+    axes.text(
+        0.1,
+        (max(N) + n_upper_outliers) * 1.1,
+        str(
+            round(
+                len([i for i, x in enumerate(loopnums) if (x == 0)])
+                / len(loopnums)
+                * 100
+            )
+        )
+        + "%",
+        horizontalalignment="left",
+        verticalalignment="top",
+        color=PLOTPARAM["color"]["neutral"],
+    )
+
+    axes.text(
+        bit_threshold + 2,
+        (max(N) + n_upper_outliers) * 1.1,
+        str(
+            round(
+                len([i for i, x in enumerate(loopnums) if (x >= bit_threshold)])
+                / len(loopnums)
+                * 100
+            )
+        )
+        + "%",
+        horizontalalignment="right",
+        verticalalignment="top",
+        color=cmaparr[-1, :],
+    )
+
+    axes.set_xlabel("Bits $2^b$")
+    axes.set_ylabel("Frequency")
+    axes.set_title("Loops per node")
+    axes.set_xticks([i + 0.5 for i in list(range(xmax))])
+    axes.set_xticklabels(["No"] + [(str(i)) for i in list(range(xmax - 2))] + ["8+"])
+    axes.set_xlim([0, xmax])
+    axes.set_ylim([0, 1.08 * axes.get_ylim()[1]])
+    axes.set_ylim([0, 1.12 * (max(N) + n_upper_outliers)])
 
 
 def plot_check(
