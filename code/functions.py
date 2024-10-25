@@ -52,16 +52,18 @@ def get_vertex_plotinfo(loopinfo, max_node_size=20):
     cmap = mpl.colormaps["viridis"].resampled(8)
     cmaparr = cmap(np.linspace(0, 1, 8))
     # cmaparr = np.vstack((cmaparr, np.repeat(cmaparr[-1:, :], 10, axis=0)))
-    cmaparr = np.vstack((cmaparr, np.repeat([[1, 1, 1, 1]], 10, axis=0)))  # white
+    cmaparr = np.vstack(
+        (cmaparr, np.repeat([[0.871, 0.176, 0.149, 1]], 10, axis=0))
+    )  # white
 
     vertex_sizes = []
     vertex_colors = np.zeros((len(loopinfo.keys()), 4))
     for k in range(len(loopinfo.keys())):
         try:
             if PLOTLOGSCALE:
-                val = np.log2(len(loopinfo[k]["loops"]) + 1.00001)
+                val = np.clip(math.ceil(np.log2(len(loopinfo[k]["loops"]))), 0, 9)
                 vertex_sizes.append(math.sqrt(val))
-                vertex_colors[k, :] = cmaparr[math.floor(val), :]
+                vertex_colors[k, :] = cmaparr[val - 1, :]
             else:
                 # if linear, make it the marker's area, so take the sqrt
                 vertex_sizes.append(math.sqrt(len(loopinfo[k]["loops"])))
