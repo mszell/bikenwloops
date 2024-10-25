@@ -176,15 +176,16 @@ def plot_dk_gdf(
     ax = fig.add_axes(
         [-0.03, -0.03, 1.06, 1.06]
     )  # negative because plot() introduces a padding
-    nodes.plot(
-        ax=ax,
-        zorder=1,
-        markersize=vertex_size,
-        alpha=1,
-        color=vertex_color,
-        edgecolor=PLOTPARAM["color"]["neutral"],
-        linewidth=0.6,
-    )
+    if nodes is not None:
+        nodes.plot(
+            ax=ax,
+            zorder=1,
+            markersize=vertex_size,
+            alpha=1,
+            color=vertex_color,
+            edgecolor=PLOTPARAM["color"]["neutral"],
+            linewidth=0.6,
+        )
     edges.plot(ax=ax, zorder=0, linewidth=link_width, color=link_color)
 
     bornholm_circle = shapely.Point(657_200, 6_245_800).buffer(23000).exterior
@@ -194,7 +195,7 @@ def plot_dk_gdf(
     )
 
     ax.set_axis_off()
-    return fig
+    return fig, ax
 
 
 def plot_check(
