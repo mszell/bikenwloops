@@ -82,7 +82,9 @@ def get_vertex_plotinfo(loopinfo, max_node_size=150, bit_threshold=8):
     return vertex_sizes, vertex_colors
 
 
-def get_link_plotinfo(edges, var="max_slope", threshold=4):
+def get_link_plotinfo(
+    edges, var_bad="max_slope", var_good=None, threshold_bad=4, threshold_good=0
+):
     """
     Calculate a link width and color for each link in the loopinfo
     dict for plotting given some criterion.
@@ -90,13 +92,31 @@ def get_link_plotinfo(edges, var="max_slope", threshold=4):
 
     link_widths = np.zeros(len(edges))
     link_colors = np.zeros((len(edges), 4))
-    for i, ms in enumerate(edges["max_slope"]):
-        if ms < threshold:
-            link_widths[i] = 0.3
-            link_colors[i, :] = [0.267, 0.267, 0.267, 1]
-        else:
-            link_widths[i] = PLOTPARAM["maxslope_classification_linewidths"]["medium"]
-            link_colors[i, :] = [0.871, 0.176, 0.149, 1]
+    if var_good is None:
+        for i, vbad in enumerate(edges[var_bad]):
+            if vbad < threshold_bad:
+                link_widths[i] = 0.3
+                link_colors[i, :] = [0.267, 0.267, 0.267, 1]
+            else:
+                link_widths[i] = PLOTPARAM["maxslope_classification_linewidths"][
+                    "medium"
+                ]
+                link_colors[i, :] = [0.871, 0.176, 0.149, 1]
+    else:
+        for i, (vbad, vgood) in enumerate(zip(edges[var_bad], edges[var_good])):
+            if vbad < threshold_bad and vgood >= threshold_good:  # all fulfilled
+                link_widths[i] = PLOTPARAM["maxslope_classification_linewidths"][
+                    "medium"
+                ]
+                link_colors[i, :] = [0.031, 0.271, 0.58, 1]  # blue
+            elif vbad >= threshold_bad:  # bad
+                link_widths[i] = PLOTPARAM["maxslope_classification_linewidths"][
+                    "medium"
+                ]
+                link_colors[i, :] = [0.871, 0.176, 0.149, 1]
+            else:  # not bad but also not good
+                link_widths[i] = 0.3
+                link_colors[i, :] = [0.267, 0.267, 0.267, 1]
 
     return link_widths, link_colors
 
