@@ -43,7 +43,7 @@ def get_vertex_sizes(loopinfo, max_node_size=20):
     return vertex_sizes, numloops_max
 
 
-def get_vertex_plotinfo(loopinfo, max_node_size=100, bit_threshold=8):
+def get_vertex_plotinfo(loopinfo, max_node_size=150, bit_threshold=8):
     """
     Calculate a node size and color for each node in the loopinfo
     dict for plotting given the number of loops in the node. The
@@ -78,8 +78,27 @@ def get_vertex_plotinfo(loopinfo, max_node_size=100, bit_threshold=8):
             vertex_sizes.append(math.sqrt(val) + 2)
             vertex_colors[k, :] = [1, 1, 1, 1]
 
-    vertex_sizes = [(i - 0.5) / (maxbits / max_node_size) for i in vertex_sizes]
+    vertex_sizes = [(i - 1.25) / (maxbits / max_node_size) for i in vertex_sizes]
     return vertex_sizes, vertex_colors
+
+
+def get_link_plotinfo(edges, var="max_slope", threshold=4):
+    """
+    Calculate a link width and color for each link in the loopinfo
+    dict for plotting given some criterion.
+    """
+
+    link_widths = np.zeros(len(edges))
+    link_colors = np.zeros((len(edges), 4))
+    for i, ms in enumerate(edges["max_slope"]):
+        if ms < threshold:
+            link_widths[i] = 0.3
+            link_colors[i, :] = [0.267, 0.267, 0.267, 1]
+        else:
+            link_widths[i] = PLOTPARAM["maxslope_classification_linewidths"]["medium"]
+            link_colors[i, :] = [0.871, 0.176, 0.149, 1]
+
+    return link_widths, link_colors
 
 
 def lighten_color(color, amount=0.5):
