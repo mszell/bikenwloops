@@ -213,6 +213,57 @@ def plot_dk_gdf(
     return fig, ax
 
 
+def plot_dk_scenariotext(ax, filterdepth=0):
+    ax.text(
+        0.06,
+        0.925,
+        SCENARIO[SCENARIOID]["name"],
+        horizontalalignment="left",
+        transform=ax.transAxes,
+        fontsize=11,
+    )
+    if filterdepth >= 1:
+        ax.text(
+            0.07,
+            0.895,
+            "Loop length ≥"
+            + str(SCENARIO[SCENARIOID]["looplength_min"] // 1000)
+            + "km and ≤"
+            + str(SCENARIO[SCENARIOID]["looplength_max"] // 1000)
+            + "km",
+            horizontalalignment="left",
+            transform=ax.transAxes,
+            fontsize=9,
+        )
+    if filterdepth >= 2:
+        ax.text(
+            0.07,
+            0.87,
+            "Maximum gradient ≤" + str(SCENARIO[SCENARIOID]["maxslope_limit"]) + "%",
+            horizontalalignment="left",
+            transform=ax.transAxes,
+            fontsize=9,
+        )
+    if filterdepth >= 3:
+        ax.text(
+            0.07,
+            0.845,
+            "Water every " + str(WATERLENGTH_MAX // 1000) + "km",
+            horizontalalignment="left",
+            transform=ax.transAxes,
+            fontsize=9,
+        )
+    if filterdepth >= 4:
+        ax.text(
+            0.07,
+            0.82,
+            "POI diversity 3",
+            horizontalalignment="left",
+            transform=ax.transAxes,
+            fontsize=9,
+        )
+
+
 def plot_dk_inset(fig, loopinfo, bit_threshold=8):
     xmax = bit_threshold + 2
     axes = fig.add_axes([0.64, 0.69, 0.31, 0.25])
