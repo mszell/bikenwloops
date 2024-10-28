@@ -423,7 +423,7 @@ def mask_node(nodeloopinfo, mask):
 # in https://github.com/anastassiavybornova/bike-node-planner
 
 
-def classify_edgelength(length_km, ideal_length_lower, ideal_length_upper, max_length):
+def classify_length(length_km, ideal_length_lower, ideal_length_upper, max_length):
     """
     length_km: length in km
     ideal_length_lower, ideal_length upper: lower and upper threshold for length's ideal range
@@ -439,24 +439,6 @@ def classify_edgelength(length_km, ideal_length_lower, ideal_length_upper, max_l
         classification = "ideal_range"
     elif length_km < max_length:
         classification = "above_ideal"
-    else:
-        classification = "too_long"
-
-    return classification
-
-
-def classify_looplength(length_km, loop_length_min, loop_length_max):
-    """
-    length_km: length in km
-    ideal_length_lower, ideal_length upper: lower and upper threshold for length's ideal range
-    max_length: maximum tolerable length
-    """
-    assert loop_length_min < loop_length_max, "Please provide valid length ranges"
-
-    if length_km < loop_length_min:
-        classification = "below_ideal"
-    elif length_km < loop_length_max:
-        classification = "ideal_range"
     else:
         classification = "too_long"
 

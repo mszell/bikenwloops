@@ -50,14 +50,10 @@ with open(r"../config.yml") as file:
             }
 
     MPERUNIT = parsed_yaml_file["mperunit"]
-    FACELOOP_LIMIT = [  # 90% of face loop lengths should conform to these length limits [m]
+    FACELOOP_LIMIT = [  # Optimal length between first and second value, maximal length the last value [m]
         parsed_yaml_file["faceloop_limit_lower"],
         parsed_yaml_file["faceloop_limit_upper"],
-    ]
-    LINK_LIMIT = [  # Optimal length between first and second value, maximal length the last value [m]
-        parsed_yaml_file["link_limit_lower"],
-        parsed_yaml_file["link_limit_upper"],
-        parsed_yaml_file["link_limit_max"],
+        parsed_yaml_file["faceloop_limit_max"],
     ]
     LINK_LIMIT = [  # Optimal length between first and second value, maximal length the last value [m]
         parsed_yaml_file["link_limit_lower"],
