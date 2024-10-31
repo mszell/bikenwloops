@@ -10,6 +10,7 @@ import numpy as np
 import momepy as momepy
 import networkx as nx
 from functools import reduce
+from itertools import product
 import pickle
 import lzma
 import shapely
