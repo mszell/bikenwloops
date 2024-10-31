@@ -418,6 +418,24 @@ def mask_node(nodeloopinfo, mask):
     }
 
 
+def synthnx_to_momepy(Gnx):
+    Gnx.graph["approach"] = "primal"
+    Gnx_nodes, Gnx_links = momepy.nx_to_gdf(net=Gnx, points=True, lines=True)
+    for index, row in Gnx_nodes.iterrows():
+        Gnx_nodes.at[index, "geometry"] = Point(row["pos"])
+    Gnx_links["geometry"] = ""
+    for index, row in Gnx_links.iterrows():
+        Gnx_links.at[index, "geometry"] = LineString(
+            [
+                Gnx_nodes.at[row["node_start"], "geometry"],
+                Gnx_nodes.at[row["node_end"], "geometry"],
+            ]
+        )
+    Gnx_links.set_geometry("geometry", inplace=True)
+
+    return Gnx_nodes, Gnx_links
+
+
 ### TOPOLOGICAL EVALUATION
 # Source: src/eval_func.py and src/plot_func.py
 # in https://github.com/anastassiavybornova/bike-node-planner

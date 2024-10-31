@@ -13,7 +13,7 @@ from functools import reduce
 import pickle
 import lzma
 import shapely
-from shapely import LineString
+from shapely import LineString, Point
 from itertools import combinations, compress
 from statistics import median
 import math
