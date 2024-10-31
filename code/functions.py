@@ -80,7 +80,7 @@ def get_vertex_plotinfo(loopinfo, max_node_size=150, bit_threshold=8, maxbits=18
         except:
             val = 0
             vertex_sizes.append(math.sqrt(val) + 2)
-            vertex_colors[k, :] = PLOTPARAM["color"]["noloop"]
+            vertex_colors[i, :] = PLOTPARAM["color"]["noloop"]
 
     vertex_sizes = [(i - 1.25) / (maxbits / max_node_size) for i in vertex_sizes]
     return vertex_sizes, vertex_colors
