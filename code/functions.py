@@ -66,7 +66,7 @@ def get_vertex_plotinfo(loopinfo, max_node_size=150, bit_threshold=8, maxbits=18
 
     vertex_sizes = []  # list
     vertex_colors = np.zeros((len(loopinfo.keys()), 4))  # numpy array
-    for k in range(len(loopinfo.keys())):
+    for i, k in enumerate(loopinfo.keys()):
         try:
             # make the value correspond to the disk's area, so take the sqrt
             if PLOTLOGSCALE:
@@ -74,7 +74,7 @@ def get_vertex_plotinfo(loopinfo, max_node_size=150, bit_threshold=8, maxbits=18
                     math.ceil(np.log2(len(loopinfo[k]["loops"]))), 0, bit_threshold + 1
                 )
                 vertex_sizes.append(math.sqrt(val) + 2)
-                vertex_colors[k, :] = cmaparr[val, :]
+                vertex_colors[i, :] = cmaparr[val, :]
             else:
                 vertex_sizes.append(math.sqrt(len(loopinfo[k]["loops"])))
         except:
@@ -408,14 +408,12 @@ def get_loop_water_profile(c):
     return wp
 
 
-def mask_node(nodeloopinfo, mask):
-    return {
-        "loops": list(compress(nodeloopinfo["loops"], mask)),
-        "lengths": list(compress(nodeloopinfo["lengths"], mask)),
-        "numnodes": list(compress(nodeloopinfo["numnodes"], mask)),
-        "water_profile": list(compress(nodeloopinfo["water_profile"], mask)),
-        "poi_diversity": list(compress(nodeloopinfo["poi_diversity"], mask)),
-    }
+def mask_node(
+    nodeloopinfo,
+    mask,
+    keys=["loops", "lengths", "numnodes", "water_profile", "poi_diversity"],
+):
+    return {k: list(compress(nodeloopinfo[k], mask)) for k in keys}
 
 
 def synthnx_to_momepy(Gnx):
