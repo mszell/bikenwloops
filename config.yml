@@ -40,16 +40,17 @@ scenario:
 # SPECIFICATION PARAMETERS
 # These parameters come from the DKNT specification at:
 # https://www.kystognaturturisme.dk/dansk-kyst-og-naturturisme/vidensbank/metodehaandbog-kommunal-kvalificering-af-danmarks-rekreative-cykelnetvaerk
+# Version: 8.5.2024
 
 # Provide the maximum length acceptable without a water
 # source, in meters.
 waterlength_max: 10000
 
 # Provide the lower and upper limits of face loop lengths,
-# in meters. # 90% of face loop lengths should conform to
-# these length limits.
+# in meters.
 faceloop_limit_lower: 8000
 faceloop_limit_upper: 20000
+faceloop_limit_max: 30000
 
 # Provide the optimal lower and upper limits of link
 # lengths, and the maximal link length, in meters.
@@ -93,6 +94,7 @@ bornholm_delta:
 # https://colorbrewer2.org
 plotparam:
   dpi: 96
+  format: "pdf"
   color:
     "neutral": "#444444"
     "dknt_green": "#009F92"
@@ -108,8 +110,9 @@ plotparam:
     "above_ideal": 1.25
     "too_long": 2.5
   loop_classification_colors:
-    "below_ideal": "#3182bd"
+    "below_ideal": "#000000"
     "ideal_range": "#bdd7e7"
+    "above_ideal": "#3182bd"
     "too_long": "#de2d26"
   maxslope_classification_colors:
     "easy": "#bdd7e7"
