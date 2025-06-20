@@ -114,6 +114,7 @@ plotparam:
     "ideal_range": "#bdd7e7"
     "above_ideal": "#3182bd"
     "too_long": "#de2d26"
+    "too_long_vacuous": "#de2d26"
   maxslope_classification_colors:
     "easy": "#bdd7e7"
     "medium": "#fd8d3c"
