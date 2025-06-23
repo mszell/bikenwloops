@@ -93,8 +93,8 @@ bornholm_delta:
 # PLOT PARAMETERS
 # https://colorbrewer2.org
 plotparam:
-  dpi: 96
-  format: "pdf"
+  dpi: 96 # constant. do not change.
+  format: "png"
   color:
     "neutral": "#444444"
     "dknt_green": "#009F92"
