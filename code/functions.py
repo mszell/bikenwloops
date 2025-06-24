@@ -264,7 +264,7 @@ def plot_dk_scenariotext(ax, filterdepth=0):
         )
 
 
-def plot_dk_inset(fig, loopinfo, bit_threshold=8):
+def plot_dk_inset(fig, loopinfo, bit_threshold=8, ymaxconst=7800):
     xmax = bit_threshold + 2
     axes = fig.add_axes([0.64, 0.69, 0.31, 0.25])
 
@@ -291,7 +291,7 @@ def plot_dk_inset(fig, loopinfo, bit_threshold=8):
 
     axes.text(
         0.1,
-        (max(N) + n_upper_outliers) * 1.1,
+        (max(N) + n_upper_outliers) * 1.1 if not ymaxconst else ymaxconst * 0.985,
         str(
             round(
                 len([i for i, x in enumerate(loopnums) if (x == 0)])
@@ -306,8 +306,8 @@ def plot_dk_inset(fig, loopinfo, bit_threshold=8):
     )
 
     axes.text(
-        bit_threshold + 2,
-        (max(N) + n_upper_outliers) * 1.1,
+        xmax - 0.1,
+        (max(N) + n_upper_outliers) * 1.1 if not ymaxconst else ymaxconst * 0.985,
         str(
             round(
                 len([i for i, x in enumerate(loopnums) if (x >= bit_threshold)])
@@ -327,8 +327,11 @@ def plot_dk_inset(fig, loopinfo, bit_threshold=8):
     axes.set_xticks([i + 0.5 for i in list(range(xmax))])
     axes.set_xticklabels(["No"] + [(str(i)) for i in list(range(xmax - 2))] + ["8+"])
     axes.set_xlim([0, xmax])
-    axes.set_ylim([0, 1.08 * axes.get_ylim()[1]])
-    axes.set_ylim([0, 1.12 * (max(N) + n_upper_outliers)])
+    # axes.set_ylim([0, 1.08 * axes.get_ylim()[1]])
+    if not ymaxconst:
+        axes.set_ylim([0, 1.12 * (max(N) + n_upper_outliers)])
+    else:
+        axes.set_ylim([0, ymaxconst])
 
 
 def plot_check(
