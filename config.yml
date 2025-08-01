@@ -24,7 +24,7 @@ mperunit: 1
 scenarioid: 1
 
 scenario:
-  - name: "Family with children" # 0
+  - name: "Family with small children" # 0
     # Provide the maximum acceptable gradient, in %.
     maxslope_limit: 4
     # Provide the minimum and maximum loop length, in meters.
@@ -94,7 +94,7 @@ bornholm_delta:
 # https://colorbrewer2.org
 plotparam:
   dpi: 96 # constant. do not change.
-  format: "png"
+  format: "pdf"
   color:
     "neutral": "#444444"
     "dknt_green": "#009F92"
