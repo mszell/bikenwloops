@@ -20,7 +20,7 @@ def get_edgewidth_constant(L):
     return round(2 * min(max(333 / L, 0.5), 3)) / 2
 
 
-def get_vertex_sizes(loopinfo, max_node_size=20):
+def get_vertex_sizes(loopinfo, max_node_size=20, plotfunc="log2"):
     """
     Calculate a node size for each node in the loopinfo dict
     for plotting given the number of loops in the node. The
@@ -30,11 +30,13 @@ def get_vertex_sizes(loopinfo, max_node_size=20):
     vertex_sizes = []
     for k in range(len(loopinfo.keys())):
         try:
-            if PLOTLOGSCALE:
+            if plotfunc == "log2":
                 vertex_sizes.append(np.log2(len(loopinfo[k]["loops"]) + 1.00001))
-            else:
+            elif plotfunc == "sqrt":
                 # if linear, make it the marker's area, so take the sqrt
                 vertex_sizes.append(math.sqrt(len(loopinfo[k]["loops"])))
+            else:  # else just return the raw number
+                vertex_sizes.append(len(loopinfo[k]["loops"]))
         except:
             vertex_sizes.append(0)
 
@@ -55,7 +57,9 @@ def get_cmap(maxbits=18, bit_threshold=8):
     return cmaparr
 
 
-def get_vertex_plotinfo(loopinfo, max_node_size=150, bit_threshold=8, maxbits=18):
+def get_vertex_plotinfo(
+    loopinfo, max_node_size=150, bit_threshold=8, maxbits=18, plotfunc="log2"
+):
     """
     Calculate a node size and color for each node in the loopinfo
     dict for plotting given the number of loops in the node. The
@@ -69,7 +73,7 @@ def get_vertex_plotinfo(loopinfo, max_node_size=150, bit_threshold=8, maxbits=18
     for i, k in enumerate(loopinfo.keys()):
         try:
             # make the value correspond to the disk's area, so take the sqrt
-            if PLOTLOGSCALE:
+            if plotfunc == "log2":
                 val = np.clip(
                     math.ceil(np.log2(len(loopinfo[k]["loops"]))), 0, bit_threshold + 1
                 )
@@ -86,12 +90,15 @@ def get_vertex_plotinfo(loopinfo, max_node_size=150, bit_threshold=8, maxbits=18
     return vertex_sizes, vertex_colors
 
 
-def get_vertex_loopnums(loopinfo):
+def get_vertex_loopnums(loopinfo, func=""):
     numvertices = len(loopinfo.keys())
     vals = np.zeros(numvertices)
     for i in range(numvertices):
         try:
-            vals[i] = len(loopinfo[i]["loops"])
+            if func == "log2":
+                vals[i] = math.log2(len(loopinfo[i]["loops"]))
+            else:
+                vals[i] = len(loopinfo[i]["loops"])
         except:
             pass
     return vals

@@ -2,6 +2,7 @@ import os
 import yaml
 from tqdm.notebook import tqdm
 import geopandas as gpd
+import pandas as pd
 import igraph as ig
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -77,10 +78,6 @@ with open(r"../config.yml") as file:
     LOOP_LENGTH_BOUND = parsed_yaml_file[
         "loop_length_bound"
     ]  # Physical length threshold in meters
-
-    PLOTLOGSCALE = parsed_yaml_file[
-        "plotlogscale"
-    ]  # Boolean flag for using log scale in certain plots
 
     MAXSLOPES_AVAILABLE = parsed_yaml_file[
         "maxslopes_available"
