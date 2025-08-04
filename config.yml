@@ -18,24 +18,24 @@ study_area_combined:
 mperunit: 1
 
 # SCENARIO RESTRICTIONS
-# For now explore two scenarios:
-# 0: Family with small children
-# 1: Teenage/adult leisure cyclist
-scenarioid: 0
+# Explore two scenarios:
+# 0: Adult leisure cyclist
+# 1: Family with small children
+scenarioid: 1
 
 scenario:
-  - name: "Family with small children" # 0
-    # Provide the maximum acceptable gradient, in %.
-    maxslope_limit: 4
-    # Provide the minimum and maximum loop length, in meters.
-    looplength_min: 5000
-    looplength_max: 20000
-  - name: "Adult leisure cyclist" # 1
+  - name: "Adult leisure cyclist" # 0
     # Provide the maximum acceptable gradient, in %.
     maxslope_limit: 6
     # Provide the minimum and maximum loop length, in meters.
     looplength_min: 10000
     looplength_max: 40000
+  - name: "Family with small children" # 1
+    # Provide the maximum acceptable gradient, in %.
+    maxslope_limit: 4
+    # Provide the minimum and maximum loop length, in meters.
+    looplength_min: 5000
+    looplength_max: 20000
 
 # SPECIFICATION PARAMETERS
 # These parameters come from the DKNT specification at:
