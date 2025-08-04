@@ -23,7 +23,7 @@ import math
 import h3
 import h3pandas
 
-np.random.seed(42)
+np.random.seed(42)  # Not good: https://github.com/crahal/seeds
 
 
 with open(r"../config.yml") as file:

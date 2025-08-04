@@ -531,3 +531,7 @@ def confband(x, y, ax):
 
     # Confidence Interval (select one)
     plot_ci_manual(t, s_err, n, x, x2, y2, ax=ax)
+
+
+# https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.linregress.html
+tinv = lambda alpha, df: abs(scipy.stats.t.ppf(alpha / 2, df))
