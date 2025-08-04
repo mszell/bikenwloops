@@ -96,7 +96,7 @@ def get_vertex_loopnums(loopinfo, func=""):
     for i in range(numvertices):
         try:
             if func == "log2":
-                vals[i] = math.log2(len(loopinfo[i]["loops"]))
+                vals[i] = math.log2(len(loopinfo[i]["loops"]) + 1)
             else:
                 vals[i] = len(loopinfo[i]["loops"])
         except:
@@ -485,3 +485,49 @@ def classify_maxslope(maxslope, maxslope_medium, maxslope_hard):
         classification = "hard"
 
     return classification
+
+
+# https://stackoverflow.com/questions/27164114/show-confidence-limits-and-prediction-limits-in-scatter-plot
+def plot_ci_manual(t, s_err, n, x, x2, y2, ax=None):
+    if ax is None:
+        ax = plt.gca()
+
+    ci = (
+        t
+        * s_err
+        * np.sqrt(1 / n + (x2 - np.mean(x)) ** 2 / np.sum((x - np.mean(x)) ** 2))
+    )
+    ax.fill_between(x2, y2 + ci, y2 - ci, color="#b9cfe7")
+
+    return ax
+
+
+def equation(a, b):
+    return np.polyval(a, b)
+
+
+def confband(x, y, ax):
+    p, cov = np.polyfit(
+        x, y, 1, cov=True
+    )  # parameters and covariance from of the fit of 1-D polynom.
+    y_model = equation(
+        p, x
+    )  # model using the fit parameters; NOTE: parameters here are coefficients
+
+    # Statistics
+    n = y.size  # number of observations
+    m = p.size  # number of parameters
+    dof = n - m  # degrees of freedom
+    t = stats.t.ppf(0.975, n - m)  # t-statistic; used for CI and PI bands
+
+    # Estimates of Error in Data/Model
+    resid = y - y_model  # residuals; diff. actual data from predicted values
+    chi2 = np.sum((resid / y_model) ** 2)  # chi-squared; estimates error in data
+    chi2_red = chi2 / dof  # reduced chi-squared; measures goodness of fit
+    s_err = np.sqrt(np.sum(resid**2) / dof)
+
+    x2 = np.linspace(np.min(x), np.max(x), 100)
+    y2 = equation(p, x2)
+
+    # Confidence Interval (select one)
+    plot_ci_manual(t, s_err, n, x, x2, y2, ax=ax)

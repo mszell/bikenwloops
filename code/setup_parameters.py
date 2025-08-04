@@ -18,6 +18,7 @@ import shapely
 from shapely import LineString, Point
 from itertools import combinations, compress
 from statistics import median
+import scipy
 import math
 import h3
 import h3pandas
