@@ -518,7 +518,7 @@ def confband(x, y, ax):
     n = y.size  # number of observations
     m = p.size  # number of parameters
     dof = n - m  # degrees of freedom
-    t = stats.t.ppf(0.975, n - m)  # t-statistic; used for CI and PI bands
+    t = scipy.stats.t.ppf(0.975, n - m)  # t-statistic; used for CI and PI bands
 
     # Estimates of Error in Data/Model
     resid = y - y_model  # residuals; diff. actual data from predicted values
