@@ -1,27 +1,44 @@
+# System / IO
 import os
 import yaml
 from tqdm.notebook import tqdm
-import geopandas as gpd
-import pandas as pd
-import igraph as ig
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-from matplotlib.lines import Line2D
-import numpy as np
-import momepy as momepy
-import networkx as nx
+import lzma
 from functools import reduce
 from itertools import product
 import pickle
-import lzma
-import shapely
-from shapely import LineString, Point
 from itertools import combinations, compress
+
+# Analysis
+import pandas as pd
+import networkx as nx
+import igraph as ig
+import numpy as np
 from statistics import median
 import scipy
 import math
+
+# Plotting
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
+from splot.libpysal import plot_spatial_weights
+from splot.esda import (
+    moran_scatterplot,
+    lisa_cluster,
+    plot_local_autocorrelation,
+    plot_moran,
+)
+
+# Geo
+import momepy as momepy
+import shapely
+from shapely import LineString, Point
+import geopandas as gpd
 import h3
 import h3pandas
+import esda
+from pysal.lib import weights
+
 
 np.random.seed(42)  # Not good: https://github.com/crahal/seeds
 

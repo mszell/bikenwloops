@@ -21,7 +21,7 @@ mperunit: 1
 # Explore two scenarios:
 # 0: Adult leisure cyclist
 # 1: Family with small children
-scenarioid: 1
+scenarioid: 0
 
 scenario:
   - name: "Adult leisure cyclist" # 0
