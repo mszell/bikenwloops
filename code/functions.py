@@ -487,6 +487,92 @@ def classify_maxslope(maxslope, maxslope_medium, maxslope_hard):
     return classification
 
 
+def restrict_scenario(allloops_all, allloops_prev, level=0):
+    """
+    Restrict the loops in the dict allloops_prev by:
+    level 0: scenario length
+    level 1: scenario gradients
+    level 2: water limits
+    level 3: POI diversity
+    """
+
+    allloops_next = {}
+
+    if level == 0:
+        for sourcenode in tqdm(allloops_prev, desc="Restrict to scenario lengths"):
+            try:
+                lengths_this = allloops_all[sourcenode]["lengths"] * MPERUNIT
+                mask_this = (lengths_this >= SCENARIO[SCENARIOID]["looplength_min"]) & (
+                    lengths_this <= SCENARIO[SCENARIOID]["looplength_max"]
+                )
+                allloops_next[sourcenode] = mask_node(
+                    allloops_prev[sourcenode], mask_this
+                )
+            except:  # Account for 0 loop nodes
+                allloops_next[sourcenode] = {}
+
+    elif level == 1:
+        for sourcenode in tqdm(allloops_prev, desc="Restrict to scenario gradients"):
+            try:
+                lengths_this = allloops_all[sourcenode]["lengths"] * MPERUNIT
+                maxslopes_this = (
+                    allloops_all[sourcenode]["max_slopes"] / 100.0
+                )  # max_slopes were multiplied by 100 for storage as uint16
+                mask_this = lengths_this >= SCENARIO[SCENARIOID]["looplength_min"]
+                mask_this &= lengths_this <= SCENARIO[SCENARIOID]["looplength_max"]
+                mask_this &= maxslopes_this <= SCENARIO[SCENARIOID]["maxslope_limit"]
+                allloops_next[sourcenode] = mask_node(
+                    allloops_all[sourcenode], mask_this
+                )
+            except:  # Account for 0 loop nodes
+                allloops_next[sourcenode] = {}
+
+    elif level == 2:
+        for sourcenode in tqdm(allloops_prev, desc="Restrict to water limits"):
+            try:
+                numloops = len(allloops_prev[sourcenode]["loops"])
+                mask_this = [True] * numloops
+                for i in range(numloops):
+                    wp = allloops_prev[sourcenode]["water_profile"][i]
+                    water_enough = True
+                    if wp:  # There is water on the way somewhere. Check distances
+                        for w in wp:
+                            if w > WATERLENGTH_MAX:
+                                water_enough = False
+                                break
+                        if water_enough and (
+                            allloops_prev[sourcenode]["lengths"][i] - wp[-1]
+                            > WATERLENGTH_MAX
+                        ):
+                            water_enough = False
+                    else:  # No water on the way, so the loop is only valid if short enough
+                        if allloops_prev[sourcenode]["lengths"][i] > WATERLENGTH_MAX:
+                            water_enough = False
+                    mask_this[i] = water_enough
+                allloops_next[sourcenode] = mask_node(
+                    allloops_prev[sourcenode], mask_this
+                )
+            except:  # Account for 0 loop nodes
+                allloops_next[sourcenode] = {}
+
+    elif level == 3:
+        for sourcenode in tqdm(allloops_prev, desc="Restrict with POI diversity"):
+            try:
+                numloops = len(allloops_prev[sourcenode]["loops"])
+                mask_this = [False] * numloops
+                for i in range(numloops):
+                    poidiv = allloops_prev[sourcenode]["poi_diversity"][i]
+                    if poidiv >= 3:
+                        mask_this[i] = True
+                allloops_next[sourcenode] = mask_node(
+                    allloops_prev[sourcenode], mask_this
+                )
+            except:  # Account for 0 loop nodes
+                allloops_next[sourcenode] = {}
+
+    return allloops_next
+
+
 # https://stackoverflow.com/questions/27164114/show-confidence-limits-and-prediction-limits-in-scatter-plot
 def plot_ci_manual(t, s_err, n, x, x2, y2, ax=None):
     if ax is None:
