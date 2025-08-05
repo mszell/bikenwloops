@@ -2,15 +2,15 @@
 # Use https://you.tools/slugify/ if unsure.
 study_area: denmark
 
-# If using a combined study area, specify it here.
-study_area_combined:
-  denmark:
-    - bornholm
-    - funen
-    - jutland
-    - lollandfalster
-    - longland
-    - zealand
+# # *discontinued* If using a combined study area, specify it here.
+# study_area_combined:
+#   denmark:
+#     - bornholm
+#     - funen
+#     - jutland
+#     - lollandfalster
+#     - longland
+#     - zealand
 
 # Provide meters per length unit.
 # If lengths are given in m, use 1.
@@ -18,7 +18,7 @@ study_area_combined:
 mperunit: 1
 
 # SCENARIO RESTRICTIONS
-# Explore two scenarios:
+# Explore three scenarios:
 # 0: Adult leisure cyclist
 # 1: Family with small children
 # 2: Family with e-bikes
