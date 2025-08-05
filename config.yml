@@ -21,7 +21,8 @@ mperunit: 1
 # Explore two scenarios:
 # 0: Adult leisure cyclist
 # 1: Family with small children
-scenarioid: 0
+# 2: Family with e-bikes
+scenarioid: 2
 
 scenario:
   - name: "Adult leisure cyclist" # 0
@@ -36,6 +37,12 @@ scenario:
     # Provide the minimum and maximum loop length, in meters.
     looplength_min: 5000
     looplength_max: 20000
+  - name: "Family with e-bikes" # 2
+    # Provide the maximum acceptable gradient, in %.
+    maxslope_limit: 100
+    # Provide the minimum and maximum loop length, in meters.
+    looplength_min: 10000
+    looplength_max: 40000
 
 # SPECIFICATION PARAMETERS
 # These parameters come from the DKNT specification at:
