@@ -53,6 +53,7 @@ with open(r"../config.yml") as file:
         "data_in_pois": "../data/input/" + STUDY_AREA + "/point/",
         "data_out": "../data/processed/" + STUDY_AREA + "/",
         "plot": "../plots/" + STUDY_AREA + "/",
+        "parameters": "../",
     }
     for folder in PATH.values():
         if not os.path.exists(folder):

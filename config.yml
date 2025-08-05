@@ -26,18 +26,21 @@ scenarioid: 2
 
 scenario:
   - name: "Adult leisure cyclist" # 0
+    name_short: "Adult"
     # Provide the maximum acceptable gradient, in %.
     maxslope_limit: 6
     # Provide the minimum and maximum loop length, in meters.
     looplength_min: 10000
     looplength_max: 40000
   - name: "Family with small children" # 1
+    name_short: "Family"
     # Provide the maximum acceptable gradient, in %.
     maxslope_limit: 4
     # Provide the minimum and maximum loop length, in meters.
     looplength_min: 5000
     looplength_max: 20000
   - name: "Family with e-bikes" # 2
+    name_short: "Family e-bikes"
     # Provide the maximum acceptable gradient, in %.
     maxslope_limit: 100
     # Provide the minimum and maximum loop length, in meters.
