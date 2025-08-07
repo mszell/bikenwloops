@@ -104,8 +104,8 @@ dependencies:
   - frozenlist=1.7.0=py312h512c567_0
   - fsspec=2025.7.0=pyhd8ed1ab_0
   - gdal=3.10.3=py312h93ff630_12
-  - geopandas=0.14.3=pyhd8ed1ab_0
-  - geopandas-base=0.14.3=pyha770c72_0
+  - geopandas=0.14.4=pyhd8ed1ab_0
+  - geopandas-base=0.14.4=pyha770c72_0
   - geos=3.13.1=hc9a1286_0
   - geotiff=1.7.4=h1d7e6e1_2
   - gettext=0.21.1=h0186832_0
@@ -262,7 +262,7 @@ dependencies:
   - open-radar-data=0.5.0=pyhd8ed1ab_0
   - openjpeg=2.5.3=h889cd5d_1
   - openldap=2.6.10=hbe55e7a_0
-  - openssl=3.5.1=h81ee809_0
+  - openssl=3.5.2=he92f556_0
   - orc=2.2.0=hca0cb2d_0
   - packaging=23.2=pyhd8ed1ab_0
   - pandas=2.2.0=py312h88edd18_0

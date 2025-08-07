@@ -59,18 +59,18 @@ with open(r"../config.yml") as file:
         if not os.path.exists(folder):
             os.makedirs(folder)
 
-    # STUDY_AREA_COMBINED = parsed_yaml_file["study_area_combined"]
-    # if STUDY_AREA in STUDY_AREA_COMBINED:  # create a nested path
-    #     PATH = {}
-    #     PATH["plot"] = "../plots/" + STUDY_AREA + "/"
-    #     PATH["data_out"] = "../data/processed/" + STUDY_AREA + "/"
-    #     for subarea in STUDY_AREA_COMBINED[STUDY_AREA]:
-    #         PATH[subarea] = {
-    #             "data_in_network": "../data/input/" + subarea + "/network/processed/",
-    #             "data_in_pois": "../data/input/" + subarea + "/point/",
-    #             "data_out": "../data/processed/" + subarea + "/",
-    #             "plot": "../plots/" + subarea + "/",
-    # }
+    STUDY_AREA_COMBINED = parsed_yaml_file["study_area_combined"]
+    if STUDY_AREA in STUDY_AREA_COMBINED:  # create a nested path
+        PATH = {}
+        PATH["plot"] = "../plots/" + STUDY_AREA + "/"
+        PATH["data_out"] = "../data/processed/" + STUDY_AREA + "/"
+        for subarea in STUDY_AREA_COMBINED[STUDY_AREA]:
+            PATH[subarea] = {
+                "data_in_network": "../data/input/" + subarea + "/network/processed/",
+                "data_in_pois": "../data/input/" + subarea + "/point/",
+                "data_out": "../data/processed/" + subarea + "/",
+                "plot": "../plots/" + subarea + "/",
+            }
 
     MPERUNIT = parsed_yaml_file["mperunit"]
     FACELOOP_LIMIT = [  # Optimal length between first and second value, maximal length the last value [m]
