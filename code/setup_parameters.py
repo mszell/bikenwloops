@@ -33,6 +33,7 @@ from splot.esda import (
 import momepy as momepy
 import shapely
 from shapely import LineString, Point
+from shapely.ops import nearest_points, snap
 import geopandas as gpd
 import h3
 import h3pandas

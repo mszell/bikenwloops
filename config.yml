@@ -1,6 +1,6 @@
 # Provide the name of the study area/project as a slug.
 # Use https://you.tools/slugify/ if unsure.
-study_area: zealand
+study_area: denmark
 
 # If using a combined study area, specify it here.
 study_area_combined:
@@ -22,7 +22,7 @@ mperunit: 1
 # 0: Adult leisure cyclist
 # 1: Family with small children
 # 2: Family with e-bikes
-scenarioid: 2
+scenarioid: 0
 
 scenario:
   - name: "Adult leisure cyclist" # 0
