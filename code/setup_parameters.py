@@ -40,29 +40,29 @@ import h3pandas
 import esda
 from pysal.lib import weights
 
-
 np.random.seed(42)  # Not good: https://github.com/crahal/seeds
 
+PATH = {"parameters": "../parameters/"}
 
-with open(r"../config.yml") as file:
+with open(PATH["parameters"] + "config.yml") as file:
     parsed_yaml_file = yaml.load(file, Loader=yaml.FullLoader)
 
     STUDY_AREA = parsed_yaml_file["study_area"]
 
-    PATH = {
-        "data_in_network": "../data/input/" + STUDY_AREA + "/network/processed/",
-        "data_in_pois": "../data/input/" + STUDY_AREA + "/point/",
-        "data_out": "../data/processed/" + STUDY_AREA + "/",
-        "plot": "../plots/" + STUDY_AREA + "/",
-        "parameters": "../",
-    }
+    PATH.update(
+        {
+            "data_in_network": "../data/input/" + STUDY_AREA + "/network/processed/",
+            "data_in_pois": "../data/input/" + STUDY_AREA + "/point/",
+            "data_out": "../data/processed/" + STUDY_AREA + "/",
+            "plot": "../plots/" + STUDY_AREA + "/",
+        }
+    )
     for folder in PATH.values():
         if not os.path.exists(folder):
             os.makedirs(folder)
 
     STUDY_AREA_COMBINED = parsed_yaml_file["study_area_combined"]
     if STUDY_AREA in STUDY_AREA_COMBINED:  # create a nested path
-        PATH = {}
         PATH["plot"] = "../plots/" + STUDY_AREA + "/"
         PATH["data_out"] = "../data/processed/" + STUDY_AREA + "/"
         for subarea in STUDY_AREA_COMBINED[STUDY_AREA]:

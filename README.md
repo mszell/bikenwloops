@@ -40,7 +40,7 @@ Data of the knudepunkter network comes from [BikeNodePlanner: Data for Denmark](
 ### Step 1: Extract data with BikeNodePlanner: Data for Denmark
 
 - Use [BikeNodePlanner: Data for Denmark](https://github.com/anastassiavybornova/bike-node-planner-data-denmark)
-- Uncomment the municipalities of your study area in `config-municipalities.yml`. Several config files are already prepared for copy-pasting in the [`retrieval/`](retrieval/) folder for large study areas like Jutland or Zealand.
+- Uncomment the municipalities of your study area in `config-municipalities.yml`. Several config files are already prepared for copy-pasting in the [`parameters/dataretrieval/`](parameters/dataretrieval/) folder for large study areas like Jutland or Zealand.
 - Set all values in `config-layers-polygon.yml` to `ignore`. This file is already [prepared](retrieval/config-layers-polygon.yml) for copy-pasting.
 - Run the `run.sh` script
 - Copy all subfolders of `/input-for-bike-node-planner/` into the `/data/input/` folder of bike-node-planner
@@ -59,11 +59,11 @@ This step is needed to add elevation data (from `dem/dem.tif`) to the edges, cre
 ```
 ├── code                    <- Jupyter notebooks and py scripts
 ├── data
-│   ├── processed           <- Modified data
-│   └── raw                 <- Original, immutable data
-├── dissemination           <- Material for dissemination
+│   ├── input               <- Original, immutable data
+│   └── processed           <- Modified data
+├── parameters              <- Parameters and config files
+│   └── dataretrieval       <- Config files for retrieving data
 ├── plots                   <- Generated figures
-├── retrieval               <- Config files for retrieving data
 ├── .gitignore              <- Files and folders ignored by git
 ├── .pre-commit-config.yaml <- Pre-commit hooks used
 ├── LICENSE.txt
