@@ -58,7 +58,7 @@ This step is needed to add elevation data (from `dem/dem.tif`) to the edges, cre
 
 ```
 ├── code                    <- Jupyter notebooks and py scripts
-├── data
+├── data                    <- Data (not saved on github)
 │   ├── input               <- Original, immutable data
 │   └── processed           <- Modified data
 ├── parameters              <- Parameters and config files
