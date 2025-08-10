@@ -41,7 +41,7 @@ Data of the knudepunkter network comes from [BikeNodePlanner: Data for Denmark](
 
 - Use [BikeNodePlanner: Data for Denmark](https://github.com/anastassiavybornova/bike-node-planner-data-denmark)
 - Uncomment the municipalities of your study area in `config-municipalities.yml`. Several config files are already prepared for copy-pasting in the [`parameters/dataretrieval/`](parameters/dataretrieval/) folder for large study areas like Jutland or Zealand.
-- Set all values in `config-layers-polygon.yml` to `ignore`. This file is already [prepared](retrieval/config-layers-polygon.yml) for copy-pasting.
+- Set all values in `config-layers-polygon.yml` to `ignore`. This file is already [prepared](parameters/dataretrieval/config-layers-polygon.yml) for copy-pasting.
 - Run the `run.sh` script
 - Copy all subfolders of `/input-for-bike-node-planner/` into the `/data/input/` folder of bike-node-planner
 
