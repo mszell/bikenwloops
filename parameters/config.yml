@@ -22,7 +22,7 @@ mperunit: 1
 # 0: Adult leisure cyclist
 # 1: Family with small children
 # 2: Family with e-bikes
-scenarioid: 0
+scenarioid: 2
 
 scenario:
   - name: "Adult leisure cyclist" # 0
@@ -76,7 +76,7 @@ snap_threshold: 250
 
 # Provide the maximum number of nodes in a loop.
 # Above 30 will slow down computations.
-loop_numnode_bound: 30
+loop_numnode_bound: 8
 
 # Provide the maximum physical length in a loop, in meters.
 # Set to 0 for no limit.

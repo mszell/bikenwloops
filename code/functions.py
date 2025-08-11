@@ -374,6 +374,91 @@ def plot_check(
     return fig
 
 
+def get_allloops_nx(Gnx):
+    """
+    Get all loops, meaning a loop ABCA is counted also as BCAB and CABC
+    """
+
+    allloops = {}
+    for nid in list(Gnx.nodes(data=False)):  # Initialize allloops
+        allloops[nid] = {
+            "loops": [],
+            "lengths": [],
+            "numnodes": [],
+            "max_slopes": [],
+            "water_profile": [],
+            "poi_diversity": [],
+        }
+    numloops = 0
+    allloops_generator = nx.simple_cycles(
+        Gnx, length_bound=LOOP_NUMNODE_BOUND
+    )  # length refers to number of nodes
+    for c in tqdm(allloops_generator, desc="Generate all loops"):
+        sourcenode = c[0]
+        c_length = get_loop_length(c)
+        # LOOP_LENGTH_BOUND is 0 for no limit, or a number (meters)
+        if not LOOP_LENGTH_BOUND or c_length * MPERUNIT <= LOOP_LENGTH_BOUND:
+            c_max_slope = get_loop_max_slope(c)
+            c_water = get_loop_water_profile(c)
+            c_poi_diversity = get_loop_poi_diversity(c)
+            for sourcenode in c:
+                numloops += 1
+                allloops[sourcenode]["loops"].append(c)
+                allloops[sourcenode]["lengths"].append(c_length)
+                allloops[sourcenode]["numnodes"].append(len(c))
+                allloops[sourcenode]["max_slopes"].append(c_max_slope)
+                allloops[sourcenode]["water_profile"].append(c_water)
+                allloops[sourcenode]["poi_diversity"].append(c_poi_diversity)
+    if LOOP_LENGTH_BOUND:
+        llb_string = " and length bound " + str(LOOP_LENGTH_BOUND) + "m"
+    else:
+        llb_string = ""
+    print(
+        "Found "
+        + str(numloops)
+        + " loops for number of nodes bound "
+        + str(LOOP_NUMNODE_BOUND)
+        + llb_string
+    )
+
+    # Extract global loop properties: lengths, numnodes, maxslopes
+    alllooplengths = np.zeros(numloops, dtype=np.float32)
+    allloopnumnodes = np.zeros(numloops, dtype=np.uint8)
+    allloopmaxslopes = np.zeros(numloops, dtype=np.uint16)
+    i = 0
+    for j in tqdm(allloops, desc="Extract global loop properties"):
+        l = len(allloops[j]["lengths"])
+        alllooplengths[i : i + l] = allloops[j]["lengths"]
+        allloopnumnodes[i : i + l] = allloops[j]["numnodes"]
+        allloopmaxslopes[i : i + l] = (
+            np.array(allloops[j]["max_slopes"]) * 100
+        ).astype(np.uint16)  # max_slopes are multiplied by 100 for storage as uint16
+        i += l
+
+    # Turn lists into numpy arrays for less data storage
+    for sourcenode in tqdm(allloops, desc="Turn loop data into numpy arrays"):
+        for k, v in allloops[sourcenode].items():
+            if k == "lengths":
+                allloops[sourcenode][k] = np.array(
+                    allloops[sourcenode][k], dtype=np.float32
+                )
+            elif k == "numnodes":
+                allloops[sourcenode][k] = np.array(
+                    allloops[sourcenode][k], dtype=np.uint8
+                )
+            elif k == "max_slopes":
+                intslopes = [
+                    i * 100 for i in allloops[sourcenode][k]
+                ]  # max_slopes are multiplied by 100 for storage as uint16
+                allloops[sourcenode][k] = np.array(intslopes, dtype=np.uint16)
+            elif k == "poi_diversity":
+                allloops[sourcenode][k] = np.array(
+                    allloops[sourcenode][k], dtype=np.uint8
+                )
+
+    return allloops, alllooplengths, allloopnumnodes, allloopmaxslopes
+
+
 def get_loop_length(c):
     l = 0
     cl = len(c)
