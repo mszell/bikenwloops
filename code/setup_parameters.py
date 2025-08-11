@@ -107,6 +107,8 @@ with open(PATH["parameters"] + "config.yml") as file:
         "pois_available"
     ]  # Boolean flag for using available poi data, otherwise generating random data for testing
 
+    POI_FILES = parsed_yaml_file["poi_files"]  # Dict of POI categories and filenames
+
     BORNHOLM_DELTA = parsed_yaml_file["bornholm_delta"]
 
     PLOTPARAM = parsed_yaml_file["plotparam"]  # Dict of plotting parameters

@@ -374,6 +374,28 @@ def plot_check(
     return fig
 
 
+def load_pois():
+    """
+    Load all POIs from subareas including their categories
+    """
+    pois = gpd.GeoDataFrame()
+    for subarea in STUDY_AREA_COMBINED[STUDY_AREA]:
+        for cat in [*POI_FILES]:
+            pois_new = gpd.read_file(PATH[subarea]["data_in_pois"] + POI_FILES[cat])
+            pois_new["category"] = cat
+            # Shift Bornholm POIs
+            if subarea == "bornholm":
+                pois_new["geometry"] = pois_new["geometry"].apply(
+                    shapely.affinity.translate,
+                    xoff=BORNHOLM_DELTA[0],
+                    yoff=BORNHOLM_DELTA[1],
+                )
+
+            pois = pd.concat([pois, pois_new], ignore_index=True)
+    pois = pois.drop(["type", "gruppe"], axis=1)
+    return pois
+
+
 def get_allloops_nx(Gnx):
     """
     Get all loops, meaning a loop ABCA is counted also as BCAB and CABC

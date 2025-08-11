@@ -95,6 +95,12 @@ maxslopes_available: True
 # will then generate random poi values.
 pois_available: True
 
+# POI file categories and their filenames
+poi_files:
+  facility: "facility.gpkg"
+  service: "service.gpkg"
+  attraction: "poi.gpkg"
+
 # Provide by how many m to shift Bornholm to east and north
 bornholm_delta:
   - -220000 # east
