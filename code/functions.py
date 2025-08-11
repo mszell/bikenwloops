@@ -396,6 +396,65 @@ def load_pois():
     return pois
 
 
+def snap_pois(pois, edges):
+    """
+    Snap pois to edges
+    """
+    # https://stackoverflow.com/questions/52582864/snap-a-geodataframe-of-points-to-nearest-line-in-separate-geodataframe
+
+    # Join the closest line geometry to each point
+    edges[
+        "line_geom"
+    ] = (
+        edges.geometry
+    )  # Save the line geometry in a new column, or it is lost in the sjoin
+    pois_snapped = pois.sjoin_nearest(
+        edges[["line_geom", "geometry"]],
+        how="left",
+        max_distance=SNAP_THRESHOLD,
+        distance_col="distance",
+    )
+    drop_indices = pois_snapped[pois_snapped["line_geom"] == None].index
+    pois_snapped.drop(
+        drop_indices, inplace=True
+    )  # Drop POIs that are too far from a link
+
+    # Snap each point to the nearest point on the nearest line
+    pois_snapped["geometry"] = pois_snapped.apply(
+        lambda x: snap(
+            x.geometry,
+            nearest_points(x.geometry, x.line_geom)[1],
+            tolerance=SNAP_THRESHOLD,
+        ),
+        axis=1,
+    )
+
+    pois_snapped = pois_snapped.drop(columns=["line_geom"])
+    pois_snapped.rename(columns={"index_right": "index_edge"}, inplace=True)
+    return pois_snapped
+
+
+def update_poi_attributes(edges, pois_snapped):
+    """
+    Update the POI attributes of edges with snapped POIs
+    """
+    # Use available poi files
+    e_haspoi = {"facility": set(), "service": set(), "attraction": set()}
+
+    for _, poirow in tqdm(pois_snapped.iterrows(), total=pois_snapped.shape[0]):
+        edges.at[poirow["index_edge"], "has_water"] = True
+        edges.at[poirow["index_edge"], "has_" + poirow["category"]] = True
+    edges["has_water"] = (
+        edges["has_facility"] + edges["has_service"] + edges["has_attraction"]
+    )  # + on bools is an or
+    edges["poi_diversity"] = (
+        edges["has_facility"].astype(int)
+        + edges["has_service"].astype(int)
+        + edges["has_attraction"].astype(int)
+    )
+    return edges
+
+
 def get_allloops_nx(Gnx):
     """
     Get all loops, meaning a loop ABCA is counted also as BCAB and CABC
