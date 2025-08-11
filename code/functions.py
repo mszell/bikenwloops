@@ -610,6 +610,24 @@ def synthnx_to_momepy(Gnx):
     return Gnx_nodes, Gnx_links
 
 
+def gdf_to_igraph(edges):
+    """
+    Turn an edges gdf into a nx graph, and that one into an igraph.
+    Drop a bunch of keys.
+    """
+    Gnx = momepy.gdf_to_nx(edges, approach="primal", integer_labels=True)
+    G = ig.Graph.from_networkx(Gnx)
+    G.vs["name"] = G.vs["_nx_name"]
+    del G.vs["_nx_name"]
+    del G["approach"]
+    del G["crs"]
+    del G.es["_nx_multiedge_key"]
+    del G.es["line_geom"]
+    G.es["weight"] = G.es["mm_len"]
+    del G.es["mm_len"]
+    return G
+
+
 ### TOPOLOGICAL EVALUATION
 # Source: src/eval_func.py and src/plot_func.py
 # in https://github.com/anastassiavybornova/bike-node-planner
