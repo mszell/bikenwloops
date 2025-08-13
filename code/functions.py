@@ -286,6 +286,7 @@ def plot_dk_inset(fig, loopinfo, bit_threshold=8, ymaxconst=7800):
         density=False,
         linewidth=0.5,
     )
+    print(N)  # for debugging
 
     # Source: https://stackoverflow.com/a/49290555
     patches[0].set_edgecolor(PLOTPARAM["color"]["neutral"])
@@ -408,11 +409,11 @@ def snap_pois(pois, edges):
     ] = (
         edges.geometry
     )  # Save the line geometry in a new column, or it is lost in the sjoin
-    pois_snapped = pois.sjoin_nearest(
+    pois_snapped = pois.sjoin(
         edges[["line_geom", "geometry"]],
         how="left",
-        max_distance=SNAP_THRESHOLD,
-        distance_col="distance",
+        distance=SNAP_THRESHOLD,
+        predicate="dwithin",
     )
     drop_indices = pois_snapped[pois_snapped["line_geom"] == None].index
     pois_snapped.drop(
@@ -441,7 +442,11 @@ def update_poi_attributes(edges, pois_snapped):
     # Use available poi files
     e_haspoi = {"facility": set(), "service": set(), "attraction": set()}
 
-    for _, poirow in tqdm(pois_snapped.iterrows(), total=pois_snapped.shape[0]):
+    for _, poirow in tqdm(
+        pois_snapped.iterrows(),
+        total=pois_snapped.shape[0],
+        desc="Update link attributes with snapped POIs",
+    ):
         edges.at[poirow["index_edge"], "has_water"] = True
         edges.at[poirow["index_edge"], "has_" + poirow["category"]] = True
     edges["has_water"] = (

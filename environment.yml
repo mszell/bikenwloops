@@ -104,8 +104,8 @@ dependencies:
   - frozenlist=1.7.0=py312h512c567_0
   - fsspec=2025.7.0=pyhd8ed1ab_0
   - gdal=3.10.3=py312h93ff630_12
-  - geopandas=0.14.4=pyhd8ed1ab_0
-  - geopandas-base=0.14.4=pyha770c72_0
+  - geopandas=1.1.1=pyhd8ed1ab_0
+  - geopandas-base=1.1.1=pyha770c72_0
   - geos=3.13.1=hc9a1286_0
   - geotiff=1.7.4=h1d7e6e1_2
   - gettext=0.21.1=h0186832_0
@@ -297,6 +297,7 @@ dependencies:
   - pyarrow-core=21.0.0=py312h3dbcb64_0_cpu
   - pycparser=2.21=pyhd8ed1ab_0
   - pygments=2.17.2=pyhd8ed1ab_0
+  - pyogrio=0.11.0=py312hfd5e53c_0
   - pyparsing=3.1.1=pyhd8ed1ab_0
   - pyproj=3.7.1=py312h237c406_1
   - pysal=25.7=pyhd8ed1ab_0
