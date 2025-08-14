@@ -22,7 +22,7 @@ mperunit: 1
 # 0: Adult leisure cyclist
 # 1: Family with small children
 # 2: Family with e-bikes
-scenarioid: 1
+scenarioid: 2
 
 scenario:
   - name: "Adult leisure cyclist" # 0
