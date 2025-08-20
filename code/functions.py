@@ -286,7 +286,6 @@ def plot_dk_inset(fig, loopinfo, bit_threshold=8, ymaxconst=7800):
         density=False,
         linewidth=0.5,
     )
-    print(N)  # for debugging
 
     # Source: https://stackoverflow.com/a/49290555
     patches[0].set_edgecolor(PLOTPARAM["color"]["neutral"])
