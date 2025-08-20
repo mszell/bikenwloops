@@ -575,6 +575,11 @@ def get_loop_poi_diversity(c):
 
 
 def get_loop_water_profile(c):
+    """
+    Get the water profile of a loop c.
+    The water profile is a tuple of distances between successive water sources.
+    For simplicity, water sources are assumed to be on the center of a link.
+    """
     wp = tuple()
     cl = len(c)
     l = 0
@@ -584,7 +589,7 @@ def get_loop_water_profile(c):
         if Gnx[c[i % cl]][c[(i + 1) % cl]][
             "has_water"
         ]:  # If link has water, assume it is half the link length in
-            wp += (l + l_this / 2,)
+            wp += (l - l_this / 2,)
             l = l_this / 2
     return wp
 
