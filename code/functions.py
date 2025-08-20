@@ -728,20 +728,19 @@ def restrict_scenario(allloops_all, allloops_prev, level=0):
                 mask_this = [True] * numloops
                 for i in range(numloops):
                     wp = allloops_prev[sourcenode]["water_profile"][i]
-                    water_enough = True
-                    if wp:  # There is water on the way somewhere. Check distances
-                        for w in wp:
-                            if w > WATERLENGTH_MAX:
-                                water_enough = False
-                                break
-                        if water_enough and (
-                            allloops_prev[sourcenode]["lengths"][i] - wp[-1]
-                            > WATERLENGTH_MAX
-                        ):
-                            water_enough = False
-                    else:  # No water on the way, so the loop is only valid if short enough
-                        if allloops_prev[sourcenode]["lengths"][i] > WATERLENGTH_MAX:
-                            water_enough = False
+                    water_enough = False
+                    if (
+                        wp
+                        and max(wp) <= WATERLENGTH_MAX
+                        and allloops_prev[sourcenode]["lengths"][i] - sum(wp)
+                        <= WATERLENGTH_MAX
+                    ):  # There is water on the way and distance is OK
+                        water_enough = True
+                    elif (
+                        not wp
+                        and allloops_prev[sourcenode]["lengths"][i] <= WATERLENGTH_MAX
+                    ):  # No water on the way, so the loop is only valid if short enough
+                        water_enough = True
                     mask_this[i] = water_enough
                 allloops_next[sourcenode] = mask_node(
                     allloops_prev[sourcenode], mask_this
