@@ -278,7 +278,7 @@ def plot_dk_inset(fig, loopinfo, bit_threshold=8, ymaxconst=7800):
     cmaparr = get_cmap(bit_threshold=bit_threshold)
     cmaparr = np.vstack((PLOTPARAM["color"]["noloop"], cmaparr))
 
-    loopnums = get_vertex_loopnums(loopinfo)
+    loopnums = get_vertex_loopnums(loopinfo, "log2")
 
     N, bins, patches = axes.hist(
         loopnums,
