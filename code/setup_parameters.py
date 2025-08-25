@@ -112,5 +112,3 @@ with open(PATH["parameters"] + "config.yml") as file:
     BORNHOLM_DELTA = parsed_yaml_file["bornholm_delta"]
 
     PLOTPARAM = parsed_yaml_file["plotparam"]  # Dict of plotting parameters
-
-plt.style.use(PATH["parameters"] + "plotstyle.mplstyle")
