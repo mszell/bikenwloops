@@ -190,6 +190,9 @@ def plot_dk_gdf(
     vertex_color=PLOTPARAM["color"]["dknt_green"],
     link_width=2,
     link_color=PLOTPARAM["color"]["dknt_green"],
+    subplotlabel="",
+    subplotlabelx=0.1,
+    subplotlabely=0.9,
 ):
     fig = plt.figure(
         figsize=(scale * 640 / PLOTPARAM["dpi"], scale * 760 / PLOTPARAM["dpi"]),
@@ -217,6 +220,15 @@ def plot_dk_gdf(
     )
 
     ax.set_axis_off()
+    ax.text(
+        subplotlabelx,
+        subplotlabely,
+        subplotlabel,
+        weight="bold",
+        size=16,
+        transform=ax.transAxes,
+    )
+
     return fig, ax
 
 
