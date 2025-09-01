@@ -114,7 +114,7 @@ plotparam:
   color:
     "neutral": "#444444"
     "dknt_green": "#009F92"
-    "noloop": [0.95, 0.95, 0.95, 1]
+    "noloop": [1, 0, 0, 1]
   edge_classification_colors:
     "below_ideal": "#000000"
     "ideal_range": "#bdd7e7"

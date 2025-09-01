@@ -47,13 +47,13 @@ def get_vertex_sizes(loopinfo, max_node_size=20, plotfunc="log2"):
 
 def get_cmap(maxbits=18, bit_threshold=8):
     cmap = mpl.colormaps["viridis"].resampled(bit_threshold)
-    cmaparr = cmap(np.linspace(0, 1, bit_threshold))
+    cmaparr = np.flipud(cmap(np.linspace(0, 1, bit_threshold)))
     cmaparr = np.vstack(
         (
             cmaparr,
-            np.repeat([[0.871, 0.176, 0.149, 1]], maxbits - bit_threshold, axis=0),
+            np.repeat([[0, 0, 0, 1]], maxbits - bit_threshold, axis=0),
         )
-    )  # red: #de2d26
+    )
     return cmaparr
 
 
@@ -86,7 +86,7 @@ def get_vertex_plotinfo(
             vertex_sizes.append(math.sqrt(val) + 2)
             vertex_colors[i, :] = PLOTPARAM["color"]["noloop"]
 
-    vertex_sizes = [(i - 1.25) / (maxbits / max_node_size) for i in vertex_sizes]
+    vertex_sizes = [6 + ((i - 1.25) / (maxbits / max_node_size)) for i in vertex_sizes]
     return vertex_sizes, vertex_colors
 
 
@@ -300,7 +300,7 @@ def plot_dk_inset(fig, loopinfo, bit_threshold=8, ymaxconst=7800):
     )
 
     # Source: https://stackoverflow.com/a/49290555
-    patches[0].set_edgecolor(PLOTPARAM["color"]["neutral"])
+    patches[0].set_edgecolor(PLOTPARAM["color"]["noloop"])
     for i in range(xmax):
         patches[i].set_facecolor(cmaparr[i, :])
 
@@ -321,7 +321,7 @@ def plot_dk_inset(fig, loopinfo, bit_threshold=8, ymaxconst=7800):
         + "%",
         horizontalalignment="left",
         verticalalignment="top",
-        color=PLOTPARAM["color"]["neutral"],
+        color=PLOTPARAM["color"]["noloop"],
     )
 
     axes.text(
