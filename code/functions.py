@@ -46,19 +46,22 @@ def get_vertex_sizes(loopinfo, max_node_size=20, plotfunc="log2"):
 
 
 def get_cmap(maxbits=18, bit_threshold=8):
-    cmap = mpl.colormaps["viridis"].resampled(bit_threshold)
-    cmaparr = np.flipud(cmap(np.linspace(0, 1, bit_threshold)))
+    cmap = mpl.colormaps["viridis"].resampled(bit_threshold + 4)
+    cmaparr = np.flipud(cmap(np.linspace(0, 1, bit_threshold + 4)))
+    cmaparr = cmaparr[:-4, :]  # Just take a part of viridis
     cmaparr = np.vstack(
         (
             cmaparr,
-            np.repeat([[0, 0, 0, 1]], maxbits - bit_threshold, axis=0),
+            np.repeat(
+                [[0.262138, 0.242286, 0.520837, 1]], maxbits - bit_threshold, axis=0
+            ),
         )
-    )
+    )  # 0.262138, 0.242286, 0.520837 is a viridis blue, leaving a gap to the next green
     return cmaparr
 
 
 def get_vertex_plotinfo(
-    loopinfo, max_node_size=150, bit_threshold=8, maxbits=18, plotfunc="log2"
+    loopinfo, max_node_size=60, bit_threshold=8, maxbits=18, plotfunc="log2"
 ):
     """
     Calculate a node size and color for each node in the loopinfo
@@ -86,7 +89,7 @@ def get_vertex_plotinfo(
             vertex_sizes.append(math.sqrt(val) + 2)
             vertex_colors[i, :] = PLOTPARAM["color"]["noloop"]
 
-    vertex_sizes = [6 + ((i - 1.25) / (maxbits / max_node_size)) for i in vertex_sizes]
+    vertex_sizes = [12 + ((i - 1.25) / (maxbits / max_node_size)) for i in vertex_sizes]
     return vertex_sizes, vertex_colors
 
 
