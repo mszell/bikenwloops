@@ -1,3 +1,18 @@
+def degreedistrib_to_csv(degdistrib, path):
+    """
+    Write degree distribution (Counter) to csv file in path (string)
+    """
+    with open(path, "w") as csvfile:
+        degrees = []
+        counts = []
+        for key, val in degdistrib.items():
+            degrees.append(key)
+            counts.append(val)
+        wr = csv.writer(csvfile)
+        wr.writerow(degrees)
+        wr.writerow(counts)
+
+
 def normalize_data(data):
     return list((data - np.min(data)) / (np.max(data) - np.min(data)))
 
