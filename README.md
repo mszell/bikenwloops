@@ -33,7 +33,7 @@ ipython kernel install --user --name=bikenwloops
 mamba deactivate
 ```
 
-You can now run `jupyter lab` with kernel `bikenwloops` (Kernel > Change Kernel > bikenwloops).
+You can now run `jupyter lab -kernel bikenwloops`.
 
 ## Data setup
 
