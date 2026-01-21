@@ -211,6 +211,7 @@ def plot_dk_gdf(
     subplotlabel="",
     subplotlabelx=0.1,
     subplotlabely=0.9,
+    proj_crs="EPSG:25832"
 ):
     fig = plt.figure(
         figsize=(scale * 640 / PLOTPARAM["dpi"], scale * 760 / PLOTPARAM["dpi"]),
@@ -219,6 +220,7 @@ def plot_dk_gdf(
     ax = fig.add_axes(
         [-0.03, -0.03, 1.06, 1.06]
     )  # negative because plot() introduces a padding
+
     if nodes is not None:
         nodes.plot(
             ax=ax,
@@ -233,6 +235,7 @@ def plot_dk_gdf(
 
     bornholm_circle = shapely.Point(657_200, 6_245_800).buffer(23000).exterior
     bornholm_circle_gdf = gpd.GeoDataFrame(index=[0], geometry=[bornholm_circle])
+    bornholm_circle_gdf = bornholm_circle_gdf.set_crs(proj_crs)
     bornholm_circle_gdf.plot(
         ax=ax, zorder=2, linewidth=0.5, color=PLOTPARAM["color"]["neutral"]
     )
