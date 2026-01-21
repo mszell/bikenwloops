@@ -1,15 +1,15 @@
 # Provide the name of the study area/project as a slug.
 # Use https://you.tools/slugify/ if unsure.
-study_area: islands
+study_area: bornholm
 
 # If using a combined study area, specify it here.
 study_area_combined:
-  islands:
+  bornholm:
     - bornholm
     # - funen
     # - jutland
     # - lollandfalster
-    - longland
+    # - longland
     # - zealand
 
 # Provide meters per length unit.
