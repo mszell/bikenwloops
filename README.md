@@ -13,6 +13,8 @@ _Output from running the code on Denmark, showing round trip options for a famil
 
 ## Installation
 
+To install and use the code, you need to have installed [JupyterLab](https://pypi.org/project/jupyterlab/).
+
 First clone the repository:
 
 ```
