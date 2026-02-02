@@ -13,13 +13,35 @@ _Output from running the code on Denmark, showing round trip options for a famil
 
 ## Installation
 
+To install and use the code, you need to have installed [JupyterLab](https://pypi.org/project/jupyterlab/).
+
 First clone the repository:
 
 ```
 git clone https://github.com/mszell/bikenwloops
 ```
 
-Go to the cloned folder and create a new virtual environment via `mamba` using the `environment.yml` file:
+Go to the cloned folder.
+
+### Installation with pixi
+
+Installation with [`pixi`](https://pixi.prefix.dev/latest/) is fastest and most stable. Setup a new virtual environment using the `environment.yml` file:
+
+```
+pixi init --import environment.yml
+```
+
+Now build the environment and run it:
+
+```
+pixi run jupyter lab
+```
+
+An instance of Jupyter lab is automatically going to open in your browser after the environment is built.
+
+### Installation with mamba/conda
+
+Alternatively use [`mamba`](https://mamba.readthedocs.io/en/latest/index.html) (or `conda`, which is slower). Create a new virtual environment using the `environment.yml` file:
 
 ```
 mamba env create -f environment.yml
@@ -33,7 +55,7 @@ ipython kernel install --user --name=bikenwloops
 mamba deactivate
 ```
 
-You can now run `jupyter lab -kernel bikenwloops`.
+You can now run Jupyter `jupyter lab` with the kernel `bikenwloops ` (Kernel > Change Kernel > bikenwloops).
 
 ## Data setup
 
