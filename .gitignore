@@ -1,10 +1,8 @@
 #Data
-data/processed/
-*/raw/*
-data/
 specification.pdf
 plots/
-
+data/input
+data/processed
 
 # Distribution / packaging
 .Python
