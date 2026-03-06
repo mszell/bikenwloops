@@ -1,8 +1,9 @@
-# Provide the name of the study area/project as a slug.
-# Use https://you.tools/slugify/ if unsure.
+# Provide the name of the study area/project.
+# This is denmark for all notebooks except for 00
 study_area: denmark
 
-# If using a combined study area, specify it here.
+# Denmark is analyzed as a combined study area, specified here.
+# Do not change these values unless you know what you are doing.
 study_area_combined:
   denmark:
     - bornholm
