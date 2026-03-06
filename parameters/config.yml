@@ -71,6 +71,9 @@ link_limit_max: 10000
 
 # TECHNICAL PARAMETERS
 
+# Coordinate reference system
+crs: 25832
+
 # Provide the snap threshold, for snapping POIs to network
 # links, in meters.
 snap_threshold: 250

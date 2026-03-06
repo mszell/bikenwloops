@@ -94,6 +94,8 @@ with open(PATH["parameters"] + "config.yml") as file:
     SCENARIOID = parsed_yaml_file["scenarioid"]
     SCENARIO = parsed_yaml_file["scenario"]  # List of scenario parameters
 
+    CRS = parsed_yaml_file["crs"]  # Coordinate reference system
+
     SNAP_THRESHOLD = parsed_yaml_file[
         "snap_threshold"
     ]  # Threshold to snap POIs to network links [m]
