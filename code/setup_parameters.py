@@ -53,6 +53,7 @@ with open(PATH["parameters"] + "config.yml") as file:
 
     PATH.update(
         {
+            "data_in_network_raw": "../data/input/" + STUDY_AREA + "/network/raw/",
             "data_in_network": "../data/input/" + STUDY_AREA + "/network/processed/",
             "data_in_pois": "../data/input/" + STUDY_AREA + "/point/",
             "data_out": "../data/processed/" + STUDY_AREA + "/",
@@ -69,6 +70,7 @@ with open(PATH["parameters"] + "config.yml") as file:
         PATH["data_out"] = "../data/processed/" + STUDY_AREA + "/"
         for subarea in STUDY_AREA_COMBINED[STUDY_AREA]:
             PATH[subarea] = {
+                "data_in_network_raw": "../data/input/" + subarea + "/network/raw/",
                 "data_in_network": "../data/input/" + subarea + "/network/processed/",
                 "data_in_pois": "../data/input/" + subarea + "/point/",
                 "data_out": "../data/processed/" + subarea + "/",
