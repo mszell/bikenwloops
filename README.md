@@ -7,7 +7,7 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
-This is the source code for the scientific project _Quality assessment of a country-wide bicycle node network with loop census analysis_. The code assesses the quality of a [Bicycle Node Network](https://en.wikipedia.org/wiki/Numbered-node_cycle_network) via loop census analysis.
+This is the source code for reproducing the scientific project _Quality assessment of a country-wide bicycle node network with loop census analysis_. The code assesses the quality of a [Bicycle Node Network](https://en.wikipedia.org/wiki/Numbered-node_cycle_network) via loop census analysis.
 ![Output from running the code on Denmark, showing round trip options for a family with small children](splashimage.jpg)  
 _Output from running the code on Denmark, showing round trip options for a family with small children_
 
@@ -41,7 +41,9 @@ An instance of Jupyter lab is automatically going to open in your browser after 
 
 ### Installation with mamba/conda
 
-<details><summary>Alternatively, use [`mamba`](https://mamba.readthedocs.io/en/latest/index.html) (or `conda`, which is slower).</summary>
+Alternatively, use [`mamba`](https://mamba.readthedocs.io/en/latest/index.html) (or `conda`, which is slower).
+
+<details><summary>Instructions</summary>
  Create a new virtual environment using the `environment.yml` file:
 
 ```
@@ -67,9 +69,9 @@ Unpack the `data` folder into the folder of the repository. This is the data set
 
 ## Running the code
 
-There are several numbered notebooks which need to be run in a certain order and config settings. Here are the instructions to reproduce the paper.
+There are several numbered notebooks which need to be run in a certain order and with specific config settings. Here are the instructions to reproduce the paper.
 
-1. In the [config.yml](parameters/config.yml), set `study_area: bornholm`. Run [notebook 00](code/00_network_preprocessing.ipynb). Repeat this step for the other 5 study areas `funen`, `jutland`, `lollandfalster`, `longland`, `zealand`.
+1. In the [config.yml](parameters/config.yml), set `study_area: bornholm`. Run [notebook 00](code/00_network_preprocessing.ipynb). Repeat this step for the other 5 study areas `funen`, `jutland`, `lollandfalster`, `longland`, `zealand`.
 1. In the [config.yml](parameters/config.yml), set `study_area: denmark`.
 1. Run [notebook 01](code/01_poi_snapping.ipynb).
 1. Run [notebook 02](code/02_loop_generation.ipynb).
