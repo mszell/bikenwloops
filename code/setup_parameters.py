@@ -23,6 +23,7 @@ import math
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
+from matplotlib.patches import Ellipse
 from splot.libpysal import plot_spatial_weights
 from splot.esda import (
     moran_scatterplot,
