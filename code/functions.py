@@ -571,7 +571,7 @@ def get_allloops_nx(Gnx):
                     allloops[sourcenode][k], dtype=np.uint8
                 )
 
-    return allloops, alllooplengths, allloopnumnodes, allloopmaxslopes
+    return numloops, allloops, alllooplengths, allloopnumnodes, allloopmaxslopes
 
 
 def get_loop_length(c):
