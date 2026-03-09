@@ -8,6 +8,7 @@
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
 This is the source code for reproducing the scientific project _Quality assessment of a country-wide bicycle node network with loop census analysis_. The code assesses the quality of a [Bicycle Node Network](https://en.wikipedia.org/wiki/Numbered-node_cycle_network) via loop census analysis.
+
 ![Output from running the code on Denmark, showing round trip options for a family with small children](splashimage.jpg)  
 _Output from running the code on Denmark, showing round trip options for a family with small children_
 
@@ -88,7 +89,7 @@ Data of the knudepunkter network comes from [BikeNodePlanner: Data for Denmark](
 > [!CAUTION]
 > All necessary data to reproduce the paper have been assembled in the zenodo repository above, so it is not necessary nor recommended to re-do this data retrieval.
 
-<details><summary>Nevertheless, we provide our original steps to retrieve and assemble the data here.</summary>
+<details><summary>Nevertheless, here we provide our original steps to retrieve and assemble the data.</summary>
 
 ### Step 1: Extract data with BikeNodePlanner: Data for Denmark
 
