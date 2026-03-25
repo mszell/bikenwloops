@@ -1,6 +1,3 @@
-> [!CAUTION]
-> This project is under heavy development. Do not use.
-
 # Bicycle node network loop analysis
 
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
@@ -8,6 +5,9 @@
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
 This is the source code for reproducing the scientific project _Quality assessment of a country-wide bicycle node network with loop census analysis_. The code assesses the quality of a [Bicycle Node Network](https://en.wikipedia.org/wiki/Numbered-node_cycle_network) via loop census analysis.
+
+**Paper**: TBA  
+**Data repository**: [zenodo.19222642](https://zenodo.org/records/19222642)
 
 ![Output from running the code on Denmark, showing round trip options for a family with small children](splashimage.jpg)  
 _Output from running the code on Denmark, showing round trip options for a family with small children_
@@ -65,7 +65,7 @@ You can now run Jupyter `jupyter lab` with the kernel `bikenwloops ` (Kernel > C
 
 ## Data setup
 
-Download the data from zenodo: [insert link]  
+Download the data from zenodo: [https://zenodo.org/records/19222642](https://zenodo.org/records/19222642)  
 Unpack the `data` folder into the folder of the repository. This is the data set to reproduce the paper.
 
 ## Running the code
@@ -87,7 +87,7 @@ There are several numbered notebooks which need to be run in a certain order and
 Data of the knudepunkter network comes from [BikeNodePlanner: Data for Denmark](https://github.com/anastassiavybornova/bike-node-planner-data-denmark) and [BikeNodePlanner](https://github.com/anastassiavybornova/bike-node-planner).
 
 > [!CAUTION]
-> All necessary data to reproduce the paper have been assembled in the zenodo repository above, so it is not necessary nor recommended to re-do this data retrieval.
+> All necessary data to reproduce the paper have been assembled in the [zenodo repository](https://zenodo.org/records/19222642), so it is not necessary nor recommended to re-do this data retrieval.
 
 <details><summary>Nevertheless, here we provide our original steps to retrieve and assemble the data.</summary>
 
