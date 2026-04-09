@@ -4,9 +4,9 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
-This is the source code for reproducing the scientific project _Quality assessment of a country-wide bicycle node network with loop census analysis_. The code assesses the quality of a [Bicycle Node Network](https://en.wikipedia.org/wiki/Numbered-node_cycle_network) via loop census analysis.
+This is the source code for reproducing the scientific project _Quality assessment of a country-wide bicycle node network with loop census analysis_. The code assesses the quality of a [Bicycle Node Network](https://en.wikipedia.org/wiki/Numbered-node_cycle_network) via loop census analysis. See also the related QGIS tool [BikeNodePlanner](https://github.com/anastassiavybornova/bike-node-planner/).
 
-**Paper**: TBA  
+**Preprint**: [https://arxiv.org/abs/2604.07029](https://arxiv.org/abs/2604.07029)  
 **Data repository**: [zenodo.19222642](https://zenodo.org/records/19222642)
 
 ![Output from running the code on Denmark, showing round trip options for a family with small children](splashimage.jpg)  
